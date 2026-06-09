@@ -463,18 +463,19 @@ function pick(side){
   if(roundIdx*2>=round.length){round=winners;roundIdx=0;winners=[];}
   showMatch();
 }
-function showWin(w){     <div class="wt">🏆 WINNER!</div>
-      <div class="wn">${w.n}</div>
-      <p>Your ultimate pick in<br><strong>${currentGame.title}</strong></p>
-      <div>
-        <button class="wbtn primary" onclick="shareResult('${w.n}')">Share Result 🔗</button>
-        <button class="wbtn secondary" onclick="startGame(${currentGame.id})">Play Again 🔄</button>
-        <button class="wbtn secondary" onclick="closeModal()">Browse More</button>
-      </div>
-    </div>
-    <div style="margin:0 2rem 1.5rem;" class="ad-slot ad-side-sq">
-     
-    </div>`;
+function showWin(w){
+  var html='<div class="win">';
+  html+='<div class="we">'+w.e+'</div>';
+  html+='<div class="wt">🏆 WINNER!</div>';
+  html+='<div class="wn">'+w.n+'</div>';
+  html+='<p>Your ultimate pick in<br><strong>'+currentGame.title+'</strong></p>';
+  html+='<div>';
+  html+='<button class="wbtn primary" onclick="shareResult(\''+w.n+'\')">Share Result 🔗</button>';
+  html+='<button class="wbtn secondary" onclick="startGame('+currentGame.id+')">Play Again 🔄</button>';
+  html+='<button class="wbtn secondary" onclick="closeModal()">Browse More</button>';
+  html+='</div></div>';
+  html+='<div style="margin:0 2rem 1.5rem;" class="ad-slot ad-side-sq">📢 Google AdSense 300×250</div>';
+  document.getElementById('m-body').innerHTML=html;
 }
 
 // ===== CREATE =====
