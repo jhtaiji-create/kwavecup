@@ -426,7 +426,16 @@ function showPage(name){
   document.getElementById('page-ranking').style.display=name==='ranking'?'block':'none';
   document.getElementById('page-create').style.display=name==='create'?'block':'none';
   if(name==='ranking')renderRanking();
+  history.pushState({page:name},'','#'+name);
 }
+window.onpopstate=function(e){
+  var name=(e.state&&e.state.page)?e.state.page:'home';
+  document.getElementById('page-home').style.display=name==='home'?'block':'none';
+  document.getElementById('page-ranking').style.display=name==='ranking'?'block':'none';
+  document.getElementById('page-create').style.display=name==='create'?'block':'none';
+  document.getElementById('overlay').classList.remove('open');
+  if(name==='ranking')renderRanking();
+};
 function fmtNum(n){return n>=1000?(n/1000).toFixed(1)+'K':String(n);}
 function shuffle(a){
   for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var tmp=a[i];a[i]=a[j];a[j]=tmp;}
