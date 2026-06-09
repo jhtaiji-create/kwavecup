@@ -9,17 +9,13 @@
 <meta property="og:description" content="Pick your ultimate K-Culture favorites and share with the world!">
 <title>KWave Cup - K-Culture Worldcup</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-
-<!-- ✅ 여기에 애드센스 코드 붙여넣기 -->
-<!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7807122304004914" crossorigin="anonymous"></script> -->
-
+<!-- Google AdSense: 아래 주석 해제 후 본인 코드 입력 -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7807122304004914" crossorigin="anonymous"></script>
 <style>
 :root{--bg:#0a0a0f;--surface:#13131a;--surface2:#1c1c28;--accent:#ff2d6b;--accent2:#7c3aed;--gold:#ffd700;--text:#f0f0f0;--muted:#888;--border:rgba(255,255,255,0.08);}
 *{box-sizing:border-box;margin:0;padding:0;}
 body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-height:100vh;}
 a{text-decoration:none;color:inherit;}
-
-/* HEADER */
 header{background:var(--surface);border-bottom:1px solid var(--border);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:64px;position:sticky;top:0;z-index:100;}
 .logo{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:2px;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;cursor:pointer;}
 .logo-sub{font-size:11px;font-family:'Inter',sans-serif;color:var(--muted);letter-spacing:3px;-webkit-text-fill-color:var(--muted);display:block;}
@@ -28,15 +24,11 @@ nav button{background:none;border:none;color:var(--muted);font-size:13px;font-we
 nav button:hover{color:var(--text);}
 .btn-create{background:var(--accent);color:white;border:none;padding:8px 18px;border-radius:6px;font-size:13px;font-weight:700;cursor:pointer;letter-spacing:1px;text-transform:uppercase;transition:all 0.2s;font-family:'Inter',sans-serif;}
 .btn-create:hover{background:#ff5588;transform:translateY(-1px);}
-
-/* AD SLOTS */
 .ad-slot{background:var(--surface);border:1px dashed rgba(255,255,255,0.12);border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:11px;letter-spacing:2px;text-align:center;}
 .ad-top{margin:1rem 2rem;height:90px;}
 .ad-side-sq{height:250px;margin-bottom:1rem;}
 .ad-side-tall{height:600px;margin-bottom:1rem;}
 .ad-inline{height:90px;margin:1.5rem 0;}
-
-/* HERO */
 .hero{text-align:center;padding:2.5rem 2rem 2rem;position:relative;overflow:hidden;}
 .hero::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(ellipse at center,rgba(124,58,237,0.07) 0%,transparent 60%);pointer-events:none;}
 .hero h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(42px,7vw,88px);letter-spacing:4px;line-height:1;margin-bottom:10px;}
@@ -45,16 +37,10 @@ nav button:hover{color:var(--text);}
 .pills{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:1.5rem;}
 .pill{background:var(--surface2);border:1px solid var(--border);border-radius:999px;padding:6px 16px;font-size:13px;cursor:pointer;transition:all 0.2s;color:var(--muted);font-weight:600;}
 .pill:hover,.pill.active{background:var(--accent);border-color:var(--accent);color:white;}
-
-/* MAIN LAYOUT */
 .layout{display:grid;grid-template-columns:1fr 300px;gap:1.5rem;padding:0 2rem 3rem;max-width:1200px;margin:0 auto;}
 @media(max-width:768px){.layout{grid-template-columns:1fr;}.ad-side-sq,.ad-side-tall{display:none;}}
-
-/* SECTION */
 .section-label{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px;margin-bottom:1rem;display:flex;align-items:center;gap:8px;}
 .section-label span{font-size:11px;font-family:'Inter',sans-serif;color:var(--muted);font-weight:400;letter-spacing:1px;}
-
-/* CARDS */
 .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1rem;}
 .card{background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden;cursor:pointer;transition:all 0.25s;}
 .card:hover{border-color:rgba(255,45,107,0.5);transform:translateY(-3px);box-shadow:0 12px 32px rgba(255,45,107,0.12);}
@@ -63,8 +49,6 @@ nav button:hover{color:var(--text);}
 .card-body{padding:12px 14px;}
 .card-title{font-weight:700;font-size:14px;margin-bottom:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .card-meta{font-size:11px;color:var(--muted);}
-
-/* SIDEBAR */
 .trending-box{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.2rem;margin-bottom:1rem;}
 .trending-box h3{font-family:'Bebas Neue',sans-serif;font-size:17px;letter-spacing:2px;margin-bottom:1rem;color:var(--gold);}
 .trend-item{display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid var(--border);cursor:pointer;transition:opacity 0.2s;}
@@ -73,8 +57,6 @@ nav button:hover{color:var(--text);}
 .trend-num{font-family:'Bebas Neue',sans-serif;font-size:20px;color:var(--accent);min-width:24px;}
 .trend-info .t{font-size:12px;font-weight:600;}
 .trend-info .p{font-size:11px;color:var(--muted);}
-
-/* MODAL */
 .overlay{position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:200;display:none;align-items:center;justify-content:center;padding:1rem;}
 .overlay.open{display:flex;}
 .modal{background:var(--surface);border:1px solid var(--border);border-radius:16px;width:100%;max-width:860px;max-height:92vh;overflow-y:auto;}
@@ -82,8 +64,6 @@ nav button:hover{color:var(--text);}
 .modal-head h2{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:2px;}
 .close{background:none;border:none;color:var(--muted);font-size:22px;cursor:pointer;line-height:1;font-family:'Inter',sans-serif;}
 .close:hover{color:white;}
-
-/* TOURNAMENT */
 .t-area{padding:1.5rem 2rem;}
 .round-info{text-align:center;font-size:12px;color:var(--muted);letter-spacing:3px;text-transform:uppercase;margin-bottom:1rem;}
 .prog{height:3px;background:var(--surface2);border-radius:2px;margin-bottom:1.5rem;overflow:hidden;}
@@ -95,8 +75,6 @@ nav button:hover{color:var(--text);}
 .vs-card .n{font-weight:700;font-size:15px;margin-bottom:3px;}
 .vs-card .s{font-size:11px;color:var(--muted);}
 .vs-mid{font-family:'Bebas Neue',sans-serif;font-size:40px;color:var(--accent);text-align:center;}
-
-/* WIN */
 .win{text-align:center;padding:2.5rem 1.5rem;}
 .win .we{font-size:80px;margin-bottom:1rem;}
 .win .wt{font-family:'Bebas Neue',sans-serif;font-size:44px;letter-spacing:3px;color:var(--gold);margin-bottom:6px;}
@@ -105,8 +83,6 @@ nav button:hover{color:var(--text);}
 .wbtn{border:none;padding:11px 28px;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer;margin:4px;font-family:'Inter',sans-serif;}
 .wbtn.primary{background:var(--accent);color:white;}
 .wbtn.secondary{background:var(--surface2);color:var(--text);border:1px solid var(--border);}
-
-/* CREATE FORM */
 .form{padding:1.5rem 2rem;}
 .fg{margin-bottom:1.25rem;}
 .fg label{display:block;font-size:12px;font-weight:600;margin-bottom:6px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;}
@@ -118,8 +94,6 @@ nav button:hover{color:var(--text);}
 .item-row span{font-size:18px;}
 .item-row input{background:none;border:none;color:var(--text);font-size:13px;outline:none;width:100%;font-family:'Inter',sans-serif;}
 .submit{width:100%;background:linear-gradient(135deg,var(--accent),var(--accent2));border:none;color:white;padding:13px;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer;letter-spacing:1px;font-family:'Inter',sans-serif;margin-top:0.5rem;}
-
-/* RANKING PAGE */
 .rank-list{background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden;}
 .rank-item{display:flex;align-items:center;gap:14px;padding:14px 18px;border-bottom:1px solid var(--border);cursor:pointer;transition:background 0.2s;}
 .rank-item:last-child{border:none;}
@@ -131,12 +105,10 @@ nav button:hover{color:var(--text);}
 .rank-info .rt{font-weight:700;font-size:15px;}
 .rank-info .rm{font-size:12px;color:var(--muted);margin-top:2px;}
 .rank-plays{font-family:'Bebas Neue',sans-serif;font-size:18px;color:var(--accent);}
-
 footer{border-top:1px solid var(--border);padding:1.5rem 2rem;text-align:center;color:var(--muted);font-size:12px;line-height:2;}
 </style>
 </head>
 <body>
-
 <header>
   <div class="logo" onclick="showPage('home')">
     KWAVE CUP
@@ -150,24 +122,8 @@ footer{border-top:1px solid var(--border);padding:1.5rem 2rem;text-align:center;
   <button class="btn-create" onclick="showPage('create')">+ Create</button>
 </header>
 
-<!-- HOME PAGE -->
 <div id="page-home">
-  <!-- 상단 광고 728x90 -->
-  <div class="ad-slot ad-top">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7807122304004914"
-     crossorigin="anonymous"></script>
-<!-- KWAVE CUP 상단 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-7807122304004914"
-     data-ad-slot="3175289832"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-  </div>
-
+  <div class="ad-slot ad-top"></div>
   <div class="hero">
     <h1>K-CULTURE<br><em>WORLDCUP</em></h1>
     <p>Pick your ultimate favorites in K-pop, K-drama, K-beauty and more. Share your results worldwide!</p>
@@ -180,75 +136,33 @@ footer{border-top:1px solid var(--border);padding:1.5rem 2rem;text-align:center;
       <div class="pill" onclick="filterCat('kfashion',this)">👗 K-Fashion</div>
     </div>
   </div>
-
   <div class="layout">
     <div>
       <div class="section-label">🔥 POPULAR NOW <span>MOST PLAYED TODAY</span></div>
       <div class="cards" id="cards-grid"></div>
-
-      <!-- 인라인 광고 -->
-      <div class="ad-slot ad-inline"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7807122304004914"
-     crossorigin="anonymous"></script>
-<ins class="adsbygoogle"
-     style="display:block; text-align:center;"
-     data-ad-layout="in-article"
-     data-ad-format="fluid"
-     data-ad-client="ca-pub-7807122304004914"
-     data-ad-slot="1395304304"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script></div>
-
+      <div class="ad-slot ad-inline"></div>
       <div class="section-label" style="margin-top:1.5rem;">✨ NEW <span>RECENTLY ADDED</span></div>
       <div class="cards" id="cards-new"></div>
     </div>
     <div>
-      <!-- 사이드 광고 300x250 -->
-      <div class="ad-slot ad-side-sq"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7807122304004914"
-     crossorigin="anonymous"></script>
-<!-- K WAVE 사이드 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-7807122304004914"
-     data-ad-slot="8699079253"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script></div>
-
+      <div class="ad-slot ad-side-sq"> </div>
       <div class="trending-box">
         <h3>🏆 Trending</h3>
         <div id="trending-list"></div>
       </div>
-
-      <!-- 사이드 광고 300x600 -->
-      <div class="ad-slot ad-side-tall"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7807122304004914"
-     crossorigin="anonymous"></script>
-<!-- K WAVE 사이드세로 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-7807122304004914"
-     data-ad-slot="9680988430"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script></div>
+      <div class="ad-slot ad-side-tall"></div>
     </div>
   </div>
 </div>
 
-<!-- RANKING PAGE -->
 <div id="page-ranking" style="display:none;">
-  <div class="ad-slot ad-top" style="margin:1rem 2rem;">📢 Google AdSense 728×90</div>
+  <div class="ad-slot ad-top" style="margin:1rem 2rem;"></div>
   <div style="padding:0 2rem 3rem;max-width:800px;margin:0 auto;">
     <div class="section-label" style="margin-top:1.5rem;">🏆 GLOBAL RANKING <span>ALL TIME</span></div>
     <div class="rank-list" id="rank-list"></div>
   </div>
 </div>
 
-<!-- CREATE PAGE -->
 <div id="page-create" style="display:none;">
   <div style="max-width:600px;margin:2rem auto;padding:0 1rem;">
     <div class="section-label">✏️ CREATE WORLDCUP</div>
@@ -273,7 +187,7 @@ footer{border-top:1px solid var(--border);padding:1.5rem 2rem;text-align:center;
           <textarea id="f-desc" placeholder="Describe your worldcup for other users..."></textarea>
         </div>
         <div class="fg">
-          <label>Items * (minimum 4, format: emoji name)</label>
+          <label>Items * (minimum 4)</label>
           <div class="items-g" id="items-inputs">
             <div class="item-row"><span>⭐</span><input class="item-in" placeholder="e.g. BTS Jungkook"></div>
             <div class="item-row"><span>⭐</span><input class="item-in" placeholder="e.g. BLACKPINK Lisa"></div>
@@ -291,7 +205,6 @@ footer{border-top:1px solid var(--border);padding:1.5rem 2rem;text-align:center;
   </div>
 </div>
 
-<!-- TOURNAMENT MODAL -->
 <div class="overlay" id="overlay">
   <div class="modal">
     <div class="modal-head">
@@ -303,33 +216,32 @@ footer{border-top:1px solid var(--border);padding:1.5rem 2rem;text-align:center;
 </div>
 
 <footer>
-  © 2026 KWave Cup · K-Culture Worldcup · Loved by fans worldwide 🌏<br>
-  <a href="#" style="color:var(--muted)">Privacy Policy</a> ·
-  <a href="#" style="color:var(--muted)">Terms of Service</a> ·
+  &copy; 2026 KWave Cup &middot; K-Culture Worldcup &middot; Loved by fans worldwide 🌏<br>
+  <a href="#" style="color:var(--muted)">Privacy Policy</a> &middot;
+  <a href="#" style="color:var(--muted)">Terms of Service</a> &middot;
   <a href="#" style="color:var(--muted)">Contact</a>
 </footer>
 
 <script>
-// ===== DATA =====
-const EMOJIS = {kpop:'🎤',kdrama:'🎬',kbeauty:'💄',kfood:'🍜',kfashion:'👗'};
-const BG = {kpop:'#1a0a2e',kdrama:'#0a1a2e',kbeauty:'#2e0a1a',kfood:'#1a1a0a',kfashion:'#0a2e2e'};
+var EMOJIS = {kpop:'🎤',kdrama:'🎬',kbeauty:'💄',kfood:'🍜',kfashion:'👗'};
+var BG = {kpop:'#1a0a2e',kdrama:'#0a1a2e',kbeauty:'#2e0a1a',kfood:'#1a1a0a',kfashion:'#0a2e2e'};
 
-let GAMES = [
+var GAMES = [
   {id:1,cat:'kpop',title:'K-Pop Idol Ultimate Worldcup',plays:203700,items:[
     {n:'BTS V (Taehyung)',e:'👑'},{n:'Jungkook',e:'🐰'},{n:'Jimin',e:'🌈'},{n:'RM',e:'🎤'},
-    {n:'BLACKPINK Lisa',e:'💫'},{n:'Jennie',e:'💎'},{n:'Rosé',e:'🌹'},{n:'Jisoo',e:'🌸'},
+    {n:'BLACKPINK Lisa',e:'💫'},{n:'Jennie',e:'💎'},{n:'Rose',e:'🌹'},{n:'Jisoo',e:'🌸'},
     {n:'IU',e:'🎵'},{n:'Aespa Karina',e:'🤖'},{n:'NewJeans Minji',e:'🌟'},{n:'Stray Kids Felix',e:'🔥'},
-    {n:'Seventeen Woozi',e:'🎹'},{n:'EXO Baekhyun',e:'✨'},{n:'2NE1 CL',e:'👊'},{n:'SHINee Taemin',e:'💃'},
+    {n:'Seventeen Woozi',e:'🎹'},{n:'EXO Baekhyun',e:'✨'},{n:'2NE1 CL',e:'👊'},{n:'SHINee Taemin',e:'💃'}
   ]},
   {id:2,cat:'kpop',title:'BTS Members Worldcup',plays:187300,items:[
     {n:'RM',e:'🎤'},{n:'Jin',e:'👸'},{n:'Suga',e:'🐱'},{n:'J-Hope',e:'☀️'},
-    {n:'Jimin',e:'🌈'},{n:'V (Taehyung)',e:'🦋'},{n:'Jungkook',e:'🐰'},{n:'All of them!',e:'💜'},
+    {n:'Jimin',e:'🌈'},{n:'V (Taehyung)',e:'🦋'},{n:'Jungkook',e:'🐰'},{n:'All of them!',e:'💜'}
   ]},
   {id:3,cat:'kdrama',title:'K-Drama Characters Worldcup',plays:156400,items:[
     {n:'Goblin - Kim Shin',e:'🕯️'},{n:'Crash Landing - Ri Jung-hyuk',e:'🎖️'},
     {n:'Squid Game - Gi-hun',e:'🎯'},{n:'My Love from Star',e:'⭐'},
     {n:'Business Proposal - Tae-moo',e:'💼'},{n:'Queen of Tears - Hyun-woo',e:'👑'},
-    {n:'Vincenzo - Cassano',e:'🦅'},{n:'Itaewon Class - Saeroyi',e:'🍺'},
+    {n:'Vincenzo - Cassano',e:'🦅'},{n:'Itaewon Class - Saeroyi',e:'🍺'}
   ]},
   {id:4,cat:'kfood',title:'Korean Food Ultimate Worldcup',plays:144200,items:[
     {n:'Tteokbokki',e:'🌶️'},{n:'Korean BBQ (Samgyeopsal)',e:'🥩'},
@@ -337,132 +249,123 @@ let GAMES = [
     {n:'Korean Fried Chicken',e:'🍗'},{n:'Japchae',e:'🍝'},
     {n:'Kimchi Jjigae',e:'🫕'},{n:'Bingsu',e:'🍧'},
     {n:'Hotteok',e:'🥞'},{n:'Kimbap',e:'🍱'},
-    {n:'Sundubu Jjigae',e:'🫙'},{n:'Gamjatang',e:'🍖'},
+    {n:'Sundubu Jjigae',e:'🫙'},{n:'Gamjatang',e:'🍖'}
   ]},
   {id:5,cat:'kbeauty',title:'K-Beauty Products Worldcup',plays:98700,items:[
     {n:'Laneige Lip Sleeping Mask',e:'💋'},{n:'COSRX Snail Mucin Cream',e:'🐌'},
     {n:'Sulwhasoo First Care Essence',e:'🌿'},{n:'Innisfree Green Tea Serum',e:'🍵'},
     {n:'Some By Mi AHA Toner',e:'✨'},{n:'Etude House Play Color Eyes',e:'🎀'},
-    {n:'Klairs Vitamin C Serum',e:'🍋'},{n:'Dr. Jart Cicapair Cream',e:'🌱'},
+    {n:'Klairs Vitamin C Serum',e:'🍋'},{n:'Dr. Jart Cicapair Cream',e:'🌱'}
   ]},
   {id:6,cat:'kfashion',title:'K-Fashion Aesthetic Worldcup',plays:74300,items:[
     {n:'Y2K Korean Street Style',e:'💿'},{n:'Modern Hanbok',e:'🎎'},
     {n:'Seoul Streetwear',e:'🛹'},{n:'Soft Girl Aesthetic',e:'🎀'},
     {n:'Dark Academia Korean',e:'📚'},{n:'Sporty Chic K-Style',e:'👟'},
-    {n:'Minimal Chic',e:'🤍'},{n:'Idol Stage Fashion',e:'🌟'},
+    {n:'Minimal Chic',e:'🤍'},{n:'Idol Stage Fashion',e:'🌟'}
   ]},
   {id:7,cat:'kdrama',title:'Netflix K-Drama Worldcup 2026',plays:67800,items:[
     {n:'Squid Game',e:'🦑'},{n:'All of Us Are Dead',e:'🧟'},
     {n:'Extraordinary Attorney Woo',e:'🐋'},{n:'My Mister',e:'🌧️'},
-    {n:'Reply 1988',e:'📻'},{n:'Signal',e:'📻'},
-    {n:'Kingdom',e:'⚔️'},{n:'Sweet Home',e:'🏢'},
+    {n:'Reply 1988',e:'📻'},{n:'Signal',e:'📡'},
+    {n:'Kingdom',e:'⚔️'},{n:'Sweet Home',e:'🏢'}
   ]},
   {id:8,cat:'kpop',title:'K-Pop Girl Groups Worldcup',plays:134500,items:[
     {n:'BLACKPINK',e:'🖤'},{n:'TWICE',e:'💕'},{n:'aespa',e:'🤖'},{n:'NewJeans',e:'🐣'},
-    {n:'(G)I-DLE',e:'🌊'},{n:'ITZY',e:'⚡'},{n:'Red Velvet',e:'🍎'},{n:'Girls Generation',e:'👸'},
-  ]},
+    {n:'(G)I-DLE',e:'🌊'},{n:'ITZY',e:'⚡'},{n:'Red Velvet',e:'🍎'},{n:'Girls Generation',e:'👸'}
+  ]}
 ];
 
-let currentGame=null,round=[],roundIdx=0,winners=[],currentCat='all';
+var currentGame=null,round=[],roundIdx=0,winners=[],currentCat='all';
 
-// ===== RENDER =====
 function renderCards(cat){
-  const filtered=cat==='all'?GAMES:GAMES.filter(g=>g.cat===cat);
-  const sorted=[...filtered].sort((a,b)=>b.plays-a.plays);
+  var filtered=cat==='all'?GAMES:GAMES.filter(function(g){return g.cat===cat;});
+  var sorted=filtered.slice().sort(function(a,b){return b.plays-a.plays;});
   document.getElementById('cards-grid').innerHTML=sorted.slice(0,8).map(cardHTML).join('');
   document.getElementById('cards-new').innerHTML=sorted.slice(-4).reverse().map(cardHTML).join('');
 }
+
 function cardHTML(g){
-  return `<div class="card" onclick="startGame(${g.id})">
-    <div class="card-thumb" style="background:${BG[g.cat]}">
-      ${EMOJIS[g.cat]}<span style="font-size:56px">${g.items[0].e}</span>
-      <div class="card-badge">HOT</div>
-    </div>
-    <div class="card-body">
-      <div class="card-title">${g.title}</div>
-      <div class="card-meta">▶ ${fmtNum(g.plays)} plays · ${g.items.length} items</div>
-    </div>
-  </div>`;
-}
-function renderTrending(){
-  const sorted=[...GAMES].sort((a,b)=>b.plays-a.plays).slice(0,6);
-  document.getElementById('trending-list').innerHTML=sorted.map((g,i)=>`
-    <div class="trend-item" onclick="startGame(${g.id})">
-      <div class="trend-num ${i<3?'top':''}">${i+1}</div>
-      <div style="font-size:26px">${EMOJIS[g.cat]}</div>
-      <div class="trend-info">
-        <div class="t">${g.title}</div>
-        <div class="p">▶ ${fmtNum(g.plays)} plays</div>
-      </div>
-    </div>`).join('');
-}
-function renderRanking(){
-  document.getElementById('rank-list').innerHTML=
-    [...GAMES].sort((a,b)=>b.plays-a.plays).map((g,i)=>`
-    <div class="rank-item" onclick="startGame(${g.id})">
-      <div class="rank-n ${i<3?'top':''}">${i+1}</div>
-      <div class="rank-e">${EMOJIS[g.cat]}</div>
-      <div class="rank-info">
-        <div class="rt">${g.title}</div>
-        <div class="rm">${g.cat.toUpperCase()} · ${g.items.length} items</div>
-      </div>
-      <div class="rank-plays">${fmtNum(g.plays)}</div>
-    </div>`).join('');
+  return '<div class="card" onclick="startGame('+g.id+')">'
+    +'<div class="card-thumb" style="background:'+BG[g.cat]+'">'
+    +EMOJIS[g.cat]+'<span style="font-size:56px">'+g.items[0].e+'</span>'
+    +'<div class="card-badge">HOT</div>'
+    +'</div>'
+    +'<div class="card-body">'
+    +'<div class="card-title">'+g.title+'</div>'
+    +'<div class="card-meta">&#9654; '+fmtNum(g.plays)+' plays &middot; '+g.items.length+' items</div>'
+    +'</div></div>';
 }
 
-// ===== TOURNAMENT =====
+function renderTrending(){
+  var sorted=GAMES.slice().sort(function(a,b){return b.plays-a.plays;}).slice(0,6);
+  document.getElementById('trending-list').innerHTML=sorted.map(function(g,i){
+    return '<div class="trend-item" onclick="startGame('+g.id+')">'
+      +'<div class="trend-num '+(i<3?'top':'')+'">'+(i+1)+'</div>'
+      +'<div style="font-size:26px">'+EMOJIS[g.cat]+'</div>'
+      +'<div class="trend-info">'
+      +'<div class="t">'+g.title+'</div>'
+      +'<div class="p">&#9654; '+fmtNum(g.plays)+' plays</div>'
+      +'</div></div>';
+  }).join('');
+}
+
+function renderRanking(){
+  document.getElementById('rank-list').innerHTML=
+    GAMES.slice().sort(function(a,b){return b.plays-a.plays;}).map(function(g,i){
+      return '<div class="rank-item" onclick="startGame('+g.id+')">'
+        +'<div class="rank-n '+(i<3?'top':'')+'">'+(i+1)+'</div>'
+        +'<div class="rank-e">'+EMOJIS[g.cat]+'</div>'
+        +'<div class="rank-info">'
+        +'<div class="rt">'+g.title+'</div>'
+        +'<div class="rm">'+g.cat.toUpperCase()+' &middot; '+g.items.length+' items</div>'
+        +'</div>'
+        +'<div class="rank-plays">'+fmtNum(g.plays)+'</div>'
+        +'</div>';
+    }).join('');
+}
+
 function startGame(id){
-  currentGame=GAMES.find(g=>g.id===id);
+  currentGame=GAMES.filter(function(g){return g.id===id;})[0];
   currentGame.plays+=1;
-  round=shuffle([...currentGame.items]);
+  round=shuffle(currentGame.items.slice());
   roundIdx=0; winners=[];
   document.getElementById('m-title').textContent=currentGame.title;
   document.getElementById('overlay').classList.add('open');
   showMatch();
 }
+
 function showMatch(){
   if(round.length===1){showWin(round[0]);return;}
-  const L=round[roundIdx*2], R=round[roundIdx*2+1];
-  const total=Math.floor(round.length/2);
-  const prog=(roundIdx/total)*100;
-  const rname=round.length===2?'⚔️ FINAL':round.length===4?'🔥 SEMI-FINAL':`TOP ${round.length}`;
-  document.getElementById('m-body').innerHTML=`
-    <div class="t-area">
-      <div class="round-info">${rname} · Match ${roundIdx+1} of ${total}</div>
-      <div class="prog"><div class="prog-fill" style="width:${prog}%"></div></div>
-      <div class="vs-wrap">
-        <div class="vs-card" onclick="pick(0)">
-          <span class="e">${L.e}</span>
-          <div class="n">${L.n}</div>
-          <div class="s">👆 Tap to choose</div>
-        </div>
-        <div class="vs-mid">VS</div>
-        <div class="vs-card" onclick="pick(1)">
-          <span class="e">${R.e}</span>
-          <div class="n">${R.n}</div>
-          <div class="s">👆 Tap to choose</div>
-        </div>
-      </div>
-    </div>
-    <div style="margin:0 2rem 1.5rem;" class="ad-slot" style="height:90px;padding:1rem;">
-      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7807122304004914"
-     crossorigin="anonymous"></script>
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-format="autorelaxed"
-     data-ad-client="ca-pub-7807122304004914"
-     data-ad-slot="9820589237"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-    </div>`;
+  var L=round[roundIdx*2], R=round[roundIdx*2+1];
+  var total=Math.floor(round.length/2);
+  var prog=(roundIdx/total)*100;
+  var rname=round.length===2?'FINAL':round.length===4?'SEMI-FINAL':'TOP '+round.length;
+  var html='<div class="t-area">';
+  html+='<div class="round-info">'+rname+' &middot; Match '+(roundIdx+1)+' of '+total+'</div>';
+  html+='<div class="prog"><div class="prog-fill" style="width:'+prog+'%"></div></div>';
+  html+='<div class="vs-wrap">';
+  html+='<div class="vs-card" onclick="pick(0)">';
+  html+='<span class="e">'+L.e+'</span>';
+  html+='<div class="n">'+L.n+'</div>';
+  html+='<div class="s">👆 Tap to choose</div>';
+  html+='</div>';
+  html+='<div class="vs-mid">VS</div>';
+  html+='<div class="vs-card" onclick="pick(1)">';
+  html+='<span class="e">'+R.e+'</span>';
+  html+='<div class="n">'+R.n+'</div>';
+  html+='<div class="s">👆 Tap to choose</div>';
+  html+='</div></div></div>';
+  html+='<div class="ad-slot" style="height:90px;margin:0 2rem 1.5rem;display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--muted);letter-spacing:2px;"></div>';
+  document.getElementById('m-body').innerHTML=html;
 }
+
 function pick(side){
   winners.push(round[roundIdx*2+side]);
   roundIdx++;
   if(roundIdx*2>=round.length){round=winners;roundIdx=0;winners=[];}
   showMatch();
 }
+
 function showWin(w){
   var html='<div class="win">';
   html+='<div class="we">'+w.e+'</div>';
@@ -474,56 +377,65 @@ function showWin(w){
   html+='<button class="wbtn secondary" onclick="startGame('+currentGame.id+')">Play Again 🔄</button>';
   html+='<button class="wbtn secondary" onclick="closeModal()">Browse More</button>';
   html+='</div></div>';
-  html+='<div style="margin:0 2rem 1.5rem;" class="ad-slot ad-side-sq">📢 Google AdSense 300×250</div>';
+  html+='<div class="ad-slot ad-side-sq" style="margin:0 2rem 1.5rem;"></div>';
   document.getElementById('m-body').innerHTML=html;
 }
 
-// ===== CREATE =====
 function submitCreate(){
-  const title=document.getElementById('f-title').value.trim();
-  const cat=document.getElementById('f-cat').value;
-  const desc=document.getElementById('f-desc').value;
-  const inputs=[...document.querySelectorAll('.item-in')].map(i=>i.value.trim()).filter(Boolean);
+  var title=document.getElementById('f-title').value.trim();
+  var cat=document.getElementById('f-cat').value;
+  var desc=document.getElementById('f-desc').value;
+  var inputs=[];
+  var els=document.querySelectorAll('.item-in');
+  for(var i=0;i<els.length;i++){if(els[i].value.trim())inputs.push(els[i].value.trim());}
   if(!title){alert('Please enter a title!');return;}
   if(inputs.length<4){alert('Please add at least 4 items!');return;}
-  const newGame={
-    id:Date.now(),cat,title,plays:0,
-    items:inputs.map(n=>({n,e:catEmoji(cat)}))
-  };
+  var newGame={id:Date.now(),cat:cat,title:title,plays:0,items:inputs.map(function(n){return {n:n,e:catEmoji(cat)};})};
   GAMES.unshift(newGame);
-  alert(`"${title}" has been published! 🎉`);
+  alert('"'+title+'" has been published!');
   showPage('home');
   renderCards('all');
   renderTrending();
 }
+
 function catEmoji(cat){
-  const m={kpop:'⭐',kdrama:'🎬',kbeauty:'💄',kfood:'🍽️',kfashion:'👗'};
+  var m={kpop:'⭐',kdrama:'🎬',kbeauty:'💄',kfood:'🍽️',kfashion:'👗'};
   return m[cat]||'⭐';
 }
 
-// ===== UTILS =====
 function closeModal(){document.getElementById('overlay').classList.remove('open');}
+
 function filterCat(cat,el){
   currentCat=cat;
-  document.querySelectorAll('.pill').forEach(p=>p.classList.remove('active'));
+  var pills=document.querySelectorAll('.pill');
+  for(var i=0;i<pills.length;i++)pills[i].classList.remove('active');
   el.classList.add('active');
   renderCards(cat);
 }
+
 function showPage(name){
   document.getElementById('page-home').style.display=name==='home'?'block':'none';
   document.getElementById('page-ranking').style.display=name==='ranking'?'block':'none';
   document.getElementById('page-create').style.display=name==='create'?'block':'none';
   if(name==='ranking')renderRanking();
 }
-function shareResult(name){
-  const text=`My ultimate K-Culture pick is ${name}! 🏆 Play KWave Cup: ${location.href}`;
-  if(navigator.share){navigator.share({title:'KWave Cup Result',text});}
-  else{navigator.clipboard.writeText(text).then(()=>alert('Copied to clipboard! Share it anywhere 🔗'));}
-}
-function fmtNum(n){return n>=1000?(n/1000).toFixed(1)+'K':n;}
-function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
 
-// INIT
+function shareResult(name){
+  var text='My ultimate K-Culture pick is '+name+'! 🏆 Play KWave Cup: '+location.href;
+  if(navigator.share){navigator.share({title:'KWave Cup Result',text:text});}
+  else{navigator.clipboard.writeText(text).then(function(){alert('Copied to clipboard! Share it anywhere 🔗');});}
+}
+
+function fmtNum(n){return n>=1000?(n/1000).toFixed(1)+'K':String(n);}
+
+function shuffle(a){
+  for(var i=a.length-1;i>0;i--){
+    var j=Math.floor(Math.random()*(i+1));
+    var tmp=a[i];a[i]=a[j];a[j]=tmp;
+  }
+  return a;
+}
+
 renderCards('all');
 renderTrending();
 </script>
