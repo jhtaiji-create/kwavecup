@@ -343,6 +343,7 @@ function startGame(id){
   roundIdx=0;winners=[];
   document.getElementById('m-title').textContent=currentGame.title;
   document.getElementById('overlay').classList.add('open');
+  history.pushState({modal:true},'','#game');
   showMatch();
 }
 function showMatch(){
@@ -429,6 +430,10 @@ function showPage(name){
   history.pushState({page:name},'','#'+name);
 }
 window.onpopstate=function(e){
+  if(e.state&&e.state.modal){
+    document.getElementById('overlay').classList.remove('open');
+    return;
+  }
   var name=(e.state&&e.state.page)?e.state.page:'home';
   document.getElementById('page-home').style.display=name==='home'?'block':'none';
   document.getElementById('page-ranking').style.display=name==='ranking'?'block':'none';
