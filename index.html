@@ -4,7 +4,7 @@
    <meta name="naver-site-verification" content="bf2aaa2b74f18a54c14ba35379c9b9916e3270fd" />
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>🐾 강아지 카드 짝 맞추기</title>
+<title>🐾 동물 카드 짝 맞추기</title>
 <style>
 /* ─────────────────────────────────────────
    BASE
@@ -38,29 +38,6 @@ body {
   align-items: center;
   overflow-x: hidden;
 }
-
-/* ─────────────────────────────────────────
-   AD AREAS
-───────────────────────────────────────── */
-.ad-wrap {
-  width: 100%;
-  max-width: 720px;
-  padding: 10px 16px;
-}
-.ad-banner {
-  width: 100%;
-  height: 72px;
-  background: linear-gradient(90deg,#fff5e8,#fde8cc);
-  border: 2px dashed #e8b870;
-  border-radius: 14px;
-  display: flex; align-items: center; justify-content: center;
-  gap: 8px;
-  color: #c08040;
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: .3px;
-}
-/* 📢 실제 애드센스 코드 삽입 시 .ad-banner 내부 텍스트 대신 스크립트를 넣으세요 */
 
 /* ─────────────────────────────────────────
    HEADER
@@ -353,6 +330,14 @@ body {
   box-shadow: 0 3px 10px rgba(244,165,53,.35);
 }
 
+.modal-ad {
+  margin: 4px 0 20px;
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .modal-btns { display: flex; flex-direction: column; gap: 10px; }
 
 .btn-share {
@@ -404,17 +389,16 @@ body {
 <!-- ── 애드센스 상단 배너 ─────────────────────── -->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7807122304004914"
      crossorigin="anonymous"></script>
-<!-- KWAVE CUP 상단 -->
+<!-- 강아지카드짝 -->
 <ins class="adsbygoogle"
      style="display:block"
      data-ad-client="ca-pub-7807122304004914"
-     data-ad-slot="3175289832"
+     data-ad-slot="1032708154"
      data-ad-format="auto"
      data-full-width-responsive="true"></ins>
 <script>
      (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
-
 <!-- ── HERO HEADER ──────────────────────────── -->
 <div class="hero" style="max-width:720px;width:100%;">
   <!-- deco floats -->
@@ -427,9 +411,9 @@ body {
   <div class="hero-bowl">🍖</div>
 
   <div class="hero-title">
-    <h1>강아지 카드 <em>짝 맞추기</em></h1>
+    <h1>동물 카드 <em>짝 맞추기</em></h1>
   </div>
-  <p class="hero-sub">❤️ 같은 강아지 카드를 찾아 모두 짝을 맞춰보세요! ❤️</p>
+  <p class="hero-sub">❤️ 같은 동물 카드를 찾아 모두 짝을 맞춰보세요! ❤️</p>
 </div>
 
 <!-- ── STATS ─────────────────────────────────── -->
@@ -468,11 +452,11 @@ body {
 <!-- ── 애드센스 하단 배너 ─────────────────────── -->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7807122304004914"
      crossorigin="anonymous"></script>
-<!-- 강아지카드짝 -->
+<!-- KWAVE CUP 상단 -->
 <ins class="adsbygoogle"
      style="display:block"
      data-ad-client="ca-pub-7807122304004914"
-     data-ad-slot="1032708154"
+     data-ad-slot="3175289832"
      data-ad-format="auto"
      data-full-width-responsive="true"></ins>
 <script>
@@ -495,6 +479,16 @@ body {
       </div>
     </div>
     <div class="rank-badge" id="rank-msg">⭐ 잘 하셨어요!</div>
+    <div class="modal-ad">
+      <!-- 결과 화면 광고: 이 자리는 새 광고 단위를 만들어서 data-ad-slot을 교체하세요 -->
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-7807122304004914"
+           data-ad-slot="7920183152"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
     <div class="modal-btns">
       <button class="btn-share" onclick="shareResult()">🔗 기록 공유하기</button>
       <button class="btn-again" onclick="closeModal()">🔄 다시 하기</button>
@@ -533,7 +527,7 @@ function syncStats(){
   document.getElementById('matched').textContent=`${matchedCount}/8`;
 }
 function getRank(m,s){
-  if(m<=14&&s<=30)  return '⭐⭐⭐ 천재 강아지 탐정!';
+  if(m<=14&&s<=30)  return '⭐⭐⭐ 천재 동물 탐정!';
   if(m<=20&&s<=60)  return '⭐⭐ 훌륭한 기억력!';
   if(m<=30)          return '⭐ 좋은 실력이에요!';
   return '🐾 연습하면 더 잘할 수 있어요!';
@@ -607,7 +601,7 @@ function resetGame(){
 }
 
 function shareResult(){
-  const txt=`🐾 강아지 카드 짝 맞추기\n⏱ ${fmt(seconds)} / 🔄 ${moves}번 시도\n${getRank(moves,seconds)}\n\n${SITE_URL}`;
+  const txt=`🐾 동물 카드 짝 맞추기\n⏱ ${fmt(seconds)} / 🔄 ${moves}번 시도\n${getRank(moves,seconds)}\n\n${SITE_URL}`;
   navigator.clipboard.writeText(txt)
     .then(()=>toast('📋 클립보드에 복사됐어요!'))
     .catch(()=>prompt('텍스트를 복사하세요:',txt));
