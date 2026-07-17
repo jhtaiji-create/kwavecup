@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>⚡ 반응속도 테스트 | Brain Games</title>
+<meta name="description" content="당신의 반응속도는 몇 ms? 무료 반응속도 테스트 게임. 친구와 비교해보세요!">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --cream:#fff8f0;--brown:#5a3419;--brown-m:#8b5e3c;
+  --white:#fff;
+  --state-wait:#94a3b8;
+  --state-ready:#f4a535;
+  --state-go:#22c55e;
+  --state-early:#ef4444;
+}
+body{
+  font-family:'Apple SD Gothic Neo','Malgun Gothic','Segoe UI',sans-serif;
+  background:var(--cream);
+  min-height:100vh;
+  display:flex;flex-direction:column;align-items:center;
+  padding-bottom:40px;
+}
+.ad-wrap{width:100%;max-width:720px;padding:10px 16px;}
+.ad-banner{
+  width:100%;height:72px;
+  background:linear-gradient(90deg,#fff5e8,#fde8cc);
+  border:2px dashed #e8b870;border-radius:14px;
+  display:flex;align-items:center;justify-content:center;
+  gap:8px;color:#c08040;font-size:13px;font-weight:600;
+}
+
+/* NAV */
+.nav{
+  width:100%;max-width:720px;
+  padding:12px 16px;display:flex;align-items:center;gap:10px;
+}
+.nav a{
+  text-decoration:none;color:var(--brown-m);font-size:13px;font-weight:700;
+  display:flex;align-items:center;gap:4px;
+}
+.nav a:hover{color:var(--brown);}
+.nav-title{font-size:15px;font-weight:900;color:var(--brown);}
+
+/* GAME AREA */
+.game-wrap{width:100%;max-width:500px;padding:0 16px;}
+
+.arena{
+  width:100%;
+  border-radius:24px;
+  min-height:260px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:14px;
+  cursor:pointer;
+  transition:background .2s;
+  margin-bottom:20px;
+  padding:40px 20px;
+  position:relative;
+  user-select:none;
+}
+.arena.wait  {background:linear-gradient(135deg,#cbd5e1,#94a3b8);}
+.arena.ready {background:linear-gradient(135deg,#fcd34d,#f4a535);}
+.arena.go    {background:linear-gradient(135deg,#4ade80,#22c55e);}
+.arena.early {background:linear-gradient(135deg,#f87171,#ef4444);}
+.arena.result{background:linear-gradient(135deg,#818cf8,#6366f1);}
+
+.arena-emoji{font-size:64px;line-height:1;}
+.arena-text{font-size:22px;font-weight:900;color:#fff;text-align:center;text-shadow:0 2px 8px rgba(0,0,0,.2);}
+.arena-sub{font-size:14px;color:rgba(255,255,255,.85);text-align:center;}
+.arena-time{font-size:56px;font-weight:900;color:#fff;text-shadow:0 3px 12px rgba(0,0,0,.2);}
+.arena-unit{font-size:20px;color:rgba(255,255,255,.85);}
+
+/* STATS */
+.stats-row{
+  display:flex;gap:10px;margin-bottom:20px;
+}
+.stat-box{
+  flex:1;background:#fff;border-radius:16px;padding:14px 10px;
+  text-align:center;box-shadow:0 3px 12px rgba(90,52,25,.1);
+}
+.stat-label{font-size:11px;color:#aaa;font-weight:700;text-transform:uppercase;letter-spacing:.8px;}
+.stat-value{font-size:22px;font-weight:900;color:var(--brown);}
+
+/* RECORDS */
+.records{background:#fff;border-radius:18px;padding:18px;box-shadow:0 3px 12px rgba(90,52,25,.1);margin-bottom:20px;}
+.records-title{font-size:14px;font-weight:800;color:var(--brown);margin-bottom:12px;}
+.record-list{display:flex;flex-direction:column;gap:6px;}
+.record-item{
+  display:flex;align-items:center;gap:10px;
+  background:var(--cream);border-radius:10px;padding:8px 12px;
+  font-size:14px;
+}
+.record-rank{width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:12px;flex-shrink:0;}
+.rank-1{background:#ffd700;color:#7a5c00;}
+.rank-2{background:#e0e0e0;color:#555;}
+.rank-3{background:#f0c080;color:#6a4400;}
+.rank-n{background:#f0f0f0;color:#999;}
+.record-ms{font-weight:800;color:var(--brown);margin-left:auto;}
+
+/* BTN */
+.btn-row{display:flex;gap:10px;}
+.btn{
+  flex:1;padding:14px;border:none;border-radius:50px;
+  font-size:15px;font-weight:800;cursor:pointer;transition:transform .15s;
+}
+.btn:hover{transform:translateY(-2px);}
+.btn-share{background:linear-gradient(135deg,#5de089,#29a85e);color:#fff;box-shadow:0 4px 14px rgba(41,168,94,.35);}
+.btn-home{background:linear-gradient(135deg,#fde8d0,#f4d0a0);color:var(--brown);}
+
+/* OTHER GAMES */
+.other-games{margin-top:20px;}
+.other-title{font-size:14px;font-weight:800;color:var(--brown-m);margin-bottom:10px;}
+.other-list{display:flex;flex-direction:column;gap:8px;}
+.other-item{
+  background:#fff;border-radius:14px;padding:12px 16px;
+  display:flex;align-items:center;gap:12px;text-decoration:none;
+  box-shadow:0 2px 8px rgba(90,52,25,.08);transition:transform .15s;
+}
+.other-item:hover{transform:translateX(4px);}
+.other-icon{font-size:24px;}
+.other-name{font-size:14px;font-weight:700;color:var(--brown);}
+.other-arrow{margin-left:auto;color:#ccc;font-size:16px;}
+
+.toast{
+  position:fixed;bottom:28px;left:50%;
+  transform:translateX(-50%) translateY(8px);
+  background:rgba(40,20,5,.85);color:#fff;padding:10px 22px;
+  border-radius:50px;font-size:14px;font-weight:700;
+  opacity:0;pointer-events:none;transition:opacity .28s,transform .28s;
+  z-index:300;white-space:nowrap;
+}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+</style>
+</head>
+<body>
+
+<div class="ad-wrap" style="padding-top:12px;">
+  <!-- 애드센스 광고 코드 들어갈 자리 -->
+ <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7807122304004914"
+     crossorigin="anonymous"></script>
+<!-- 강아지카드짝 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-7807122304004914"
+     data-ad-slot="1032708154"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<div class="nav" style="max-width:500px;">
+  <a href="index.html">🏠 홈</a>
+  <span style="color:#ddd;">›</span>
+  <span class="nav-title">⚡ 반응속도 테스트</span>
+</div>
+
+<div class="game-wrap">
+
+  <div class="stats-row">
+    <div class="stat-box">
+      <div class="stat-label">🏆 최고기록</div>
+      <div class="stat-value" id="best">-</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-label">📊 평균</div>
+      <div class="stat-value" id="avg">-</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-label">🎯 시도</div>
+      <div class="stat-value" id="tries">0/5</div>
+    </div>
+  </div>
+
+  <div class="arena wait" id="arena" onclick="onArenaClick()">
+    <div class="arena-emoji" id="arena-emoji">⏳</div>
+    <div class="arena-text" id="arena-text">탭해서 시작!</div>
+    <div class="arena-sub" id="arena-sub">초록색이 되면 즉시 탭하세요</div>
+  </div>
+
+  <div class="records" id="records-box" style="display:none;">
+    <div class="records-title">📋 기록</div>
+    <div class="record-list" id="record-list"></div>
+  </div>
+
+  <div class="btn-row" id="btn-row" style="display:none;margin-bottom:20px;">
+    <button class="btn btn-share" onclick="shareResult()">🔗 기록 공유</button>
+    <button class="btn btn-home" onclick="resetGame()">🔄 다시하기</button>
+  </div>
+
+  <div class="other-games">
+    <div class="other-title">다른 게임도 해보세요 👇</div>
+    <div class="other-list">
+      <a class="other-item" href="stroop.html">
+        <span class="other-icon">🎨</span>
+        <span class="other-name">색깔 스트룹 테스트</span>
+        <span class="other-arrow">›</span>
+      </a>
+      <a class="other-item" href="click.html">
+        <span class="other-icon">🖱️</span>
+        <span class="other-name">클릭 속도 테스트</span>
+        <span class="other-arrow">›</span>
+      </a>
+      <a class="other-item" href="card.html">
+        <span class="other-icon">🐾</span>
+        <span class="other-name">강아지 카드 짝맞추기</span>
+        <span class="other-arrow">›</span>
+      </a>
+    </div>
+  </div>
+
+</div>
+
+<div class="ad-wrap" style="padding-top:20px;">
+  <!-- 애드센스 광고 코드 들어갈 자리 -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7807122304004914"
+     crossorigin="anonymous"></script>
+<!-- KWAVE CUP 상단 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-7807122304004914"
+     data-ad-slot="3175289832"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+
+<div class="toast" id="toast"></div>
+
+<script>
+const SITE = location.origin;
+let state = 'idle'; // idle | waiting | ready | result | done
+let startTime = 0;
+let timer = null;
+let records = [];
+const MAX = 5;
+
+const arena    = document.getElementById('arena');
+const emojiEl  = document.getElementById('arena-emoji');
+const textEl   = document.getElementById('arena-text');
+const subEl    = document.getElementById('arena-sub');
+const bestEl   = document.getElementById('best');
+const avgEl    = document.getElementById('avg');
+const triesEl  = document.getElementById('tries');
+const recBox   = document.getElementById('records-box');
+const recList  = document.getElementById('record-list');
+const btnRow   = document.getElementById('btn-row');
+
+function setArena(s, emoji, text, sub){
+  arena.className = 'arena ' + s;
+  emojiEl.textContent = emoji;
+  textEl.textContent  = text;
+  subEl.textContent   = sub;
+  subEl.style.display = sub ? 'block' : 'none';
+}
+
+function onArenaClick(){
+  if(state === 'idle'){
+    state = 'waiting';
+    setArena('wait','⏳','준비하세요...','초록색이 되면 즉시 탭!');
+    const delay = 1500 + Math.random() * 3000;
+    timer = setTimeout(()=>{
+      state = 'ready';
+      startTime = Date.now();
+      setArena('go','🟢','지금!','');
+    }, delay);
+    return;
+  }
+  if(state === 'waiting'){
+    clearTimeout(timer);
+    state = 'idle';
+    setArena('early','❌','너무 빨라요!','초록색이 될 때까지 기다리세요');
+    setTimeout(()=>{
+      state = 'idle';
+      setArena('wait','⏳','다시 탭해서 시작','');
+    }, 1500);
+    return;
+  }
+  if(state === 'ready'){
+    const ms = Date.now() - startTime;
+    records.push(ms);
+    state = 'result';
+    updateStats();
+    const rank = getRank(ms);
+    setArena('result','','','');
+    emojiEl.innerHTML = `<div class="arena-time">${ms}<span class="arena-unit">ms</span></div>`;
+    textEl.textContent = rank.msg;
+    subEl.textContent  = records.length < MAX ? `탭해서 계속 (${records.length}/${MAX})` : '';
+    subEl.style.display = 'block';
+    renderRecords();
+    if(records.length >= MAX){
+      state = 'done';
+      subEl.textContent = '';
+      btnRow.style.display = 'flex';
+    } else {
+      setTimeout(()=>{
+        if(state !== 'done'){
+          state = 'idle';
+          setArena('wait','⏳',`탭해서 계속 (${records.length}/${MAX})번째`,'');
+        }
+      }, 1800);
+    }
+    return;
+  }
+  if(state === 'done'){
+    // ignore clicks on arena when done — use buttons
+  }
+}
+
+function getRank(ms){
+  if(ms < 150) return {msg:'🏆 인간의 한계를 넘었어요!'};
+  if(ms < 200) return {msg:'⚡ 번개 같은 반응속도!'};
+  if(ms < 250) return {msg:'🌟 엄청 빠릅니다!'};
+  if(ms < 300) return {msg:'👍 평균보다 빠르네요!'};
+  if(ms < 400) return {msg:'😊 평균 수준이에요'};
+  return {msg:'🐢 조금 더 연습해봐요!'};
+}
+
+function updateStats(){
+  const sorted = [...records].sort((a,b)=>a-b);
+  const best = sorted[0];
+  const avg  = Math.round(records.reduce((a,b)=>a+b,0)/records.length);
+  bestEl.textContent = best + 'ms';
+  avgEl.textContent  = avg  + 'ms';
+  triesEl.textContent = records.length + '/' + MAX;
+}
+
+function renderRecords(){
+  recBox.style.display = 'block';
+  const sorted = [...records].map((v,i)=>({v,i})).sort((a,b)=>a.v-b.v);
+  recList.innerHTML = records.map((ms,i)=>{
+    const rank = sorted.findIndex(s=>s.i===i);
+    const cls  = rank===0?'rank-1':rank===1?'rank-2':rank===2?'rank-3':'rank-n';
+    const lbl  = rank===0?'🥇':rank===1?'🥈':rank===2?'🥉':`${i+1}`;
+    return `<div class="record-item">
+      <span class="record-rank ${cls}">${lbl}</span>
+      <span style="color:#888;font-size:13px;">${i+1}번째 시도</span>
+      <span class="record-ms">${ms}ms</span>
+    </div>`;
+  }).join('');
+}
+
+function resetGame(){
+  records = []; state = 'idle';
+  bestEl.textContent = avgEl.textContent = '-';
+  triesEl.textContent = '0/' + MAX;
+  recBox.style.display = 'none';
+  btnRow.style.display = 'none';
+  setArena('wait','⏳','탭해서 시작!','초록색이 되면 즉시 탭하세요');
+}
+
+function shareResult(){
+  const sorted = [...records].sort((a,b)=>a-b);
+  const best = sorted[0], avg = Math.round(records.reduce((a,b)=>a+b,0)/records.length);
+  const txt = `⚡ 반응속도 테스트 결과\n🏆 최고: ${best}ms\n📊 평균: ${avg}ms\n${getRank(best).msg}\n\n${SITE}/reaction.html`;
+  navigator.clipboard.writeText(txt).then(()=>toast('📋 클립보드에 복사됐어요!')).catch(()=>prompt('복사하세요:',txt));
+}
+
+function toast(msg){
+  const el=document.getElementById('toast');
+  el.textContent=msg;el.classList.add('show');
+  setTimeout(()=>el.classList.remove('show'),2600);
+}
+
+// init
+setArena('wait','⏳','탭해서 시작!','초록색이 되면 즉시 탭하세요');
+</script>
+</body>
+</html>

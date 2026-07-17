@@ -1,395 +1,138 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-   <meta name="naver-site-verification" content="bf2aaa2b74f18a54c14ba35379c9b9916e3270fd" />
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>🐾 동물 카드 짝 맞추기</title>
+<title>🎮 두뇌 게임 모음 | Brain Games</title>
+<meta name="description" content="반응속도, 클릭속도, 색깔 스트룹, 카드 짝맞추기 등 무료 두뇌 게임 모음. 친구와 점수 비교해보세요!">
 <style>
-/* ─────────────────────────────────────────
-   BASE
-───────────────────────────────────────── */
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-:root {
-  --cream:   #fff8f0;
-  --peach:   #fde8d0;
-  --amber:   #f4a535;
-  --amber-d: #d4891a;
-  --amber-l: #ffc96b;
-  --brown:   #5a3419;
-  --brown-m: #8b5e3c;
-  --pink:    #ff7eb3;
-  --pink-d:  #e8558a;
-  --blue:    #5bbcf8;
-  --blue-d:  #2d9be0;
-  --green:   #5dd88a;
-  --green-d: #29a85e;
-  --white:   #ffffff;
-  --shadow:  0 4px 16px rgba(90,52,25,.14);
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --cream:#fff8f0;--peach:#fde8d0;
+  --amber:#f4a535;--amber-d:#d4891a;
+  --brown:#5a3419;--brown-m:#8b5e3c;
+  --pink:#ff7eb3;--pink-d:#e8558a;
+  --blue:#5bbcf8;--blue-d:#2d9be0;
+  --green:#5dd88a;--green-d:#29a85e;
+  --purple:#a78bfa;--purple-d:#7c3aed;
+  --white:#fff;
+}
+body{
+  font-family:'Apple SD Gothic Neo','Malgun Gothic','Segoe UI',sans-serif;
+  background:var(--cream);
+  min-height:100vh;
+  display:flex;flex-direction:column;align-items:center;
+  padding-bottom:40px;
 }
 
-body {
-  font-family: 'Apple SD Gothic Neo','Malgun Gothic','Segoe UI',sans-serif;
-  background: var(--cream);
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  overflow-x: hidden;
+/* AD */
+.ad-wrap{width:100%;max-width:720px;padding:10px 16px;}
+.ad-banner{
+  width:100%;height:72px;
+  background:linear-gradient(90deg,#fff5e8,#fde8cc);
+  border:2px dashed #e8b870;border-radius:14px;
+  display:flex;align-items:center;justify-content:center;
+  gap:8px;color:#c08040;font-size:13px;font-weight:600;
 }
 
-/* ─────────────────────────────────────────
-   HEADER
-───────────────────────────────────────── */
-.hero {
-  width: 100%;
-  max-width: 720px;
-  position: relative;
-  background: linear-gradient(160deg, #ffe4c8 0%, #ffd4a8 55%, #ffbf80 100%);
-  overflow: hidden;
-  padding: 28px 20px 22px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+/* HERO */
+.hero{
+  width:100%;max-width:720px;
+  background:linear-gradient(160deg,#ffe4c8,#ffd4a8 55%,#ffbf80);
+  padding:32px 20px 28px;
+  text-align:center;position:relative;overflow:hidden;
 }
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Cellipse cx='30' cy='36' rx='10' ry='12' fill='%23f4a535' opacity='.15'/%3E%3Ccircle cx='18' cy='22' r='5' fill='%23f4a535' opacity='.12'/%3E%3Ccircle cx='42' cy='22' r='5' fill='%23f4a535' opacity='.12'/%3E%3C/svg%3E");
+  background-size:60px 60px;pointer-events:none;
+}
+.hero h1{
+  position:relative;font-size:clamp(26px,6vw,40px);font-weight:900;
+  color:var(--brown);
+  text-shadow:3px 3px 0 #fff,-1px -1px 0 #fff,1px -1px 0 #fff,-1px 1px 0 #fff;
+  letter-spacing:-1px;margin-bottom:8px;
+}
+.hero h1 em{font-style:normal;color:var(--pink-d);}
+.hero p{position:relative;font-size:14px;color:var(--brown-m);font-weight:600;}
 
-/* scattered deco paws background */
-.hero::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Cellipse cx='30' cy='36' rx='10' ry='12' fill='%23f4a535' opacity='.18'/%3E%3Ccircle cx='18' cy='22' r='5' fill='%23f4a535' opacity='.14'/%3E%3Ccircle cx='42' cy='22' r='5' fill='%23f4a535' opacity='.14'/%3E%3Ccircle cx='10' cy='32' r='4' fill='%23f4a535' opacity='.12'/%3E%3Ccircle cx='50' cy='32' r='4' fill='%23f4a535' opacity='.12'/%3E%3C/svg%3E");
-  background-size: 60px 60px;
-  pointer-events: none;
+/* GAME GRID */
+.game-section{
+  width:100%;max-width:720px;padding:24px 16px 0;
 }
+.section-title{
+  font-size:16px;font-weight:800;color:var(--brown);
+  margin-bottom:14px;display:flex;align-items:center;gap:6px;
+}
+.game-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:14px;
+}
+.game-card{
+  background:var(--white);
+  border-radius:20px;
+  padding:22px 18px;
+  text-decoration:none;
+  box-shadow:0 4px 16px rgba(90,52,25,.12);
+  transition:transform .18s,box-shadow .18s;
+  display:flex;flex-direction:column;align-items:flex-start;gap:10px;
+  border:2px solid transparent;
+  position:relative;overflow:hidden;
+}
+.game-card:hover{transform:translateY(-4px);box-shadow:0 10px 28px rgba(90,52,25,.18);}
+.game-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:4px;
+  border-radius:20px 20px 0 0;
+}
+.game-card.orange::before{background:linear-gradient(90deg,#f4a535,#e76f51);}
+.game-card.pink::before{background:linear-gradient(90deg,#ff7eb3,#e8558a);}
+.game-card.blue::before{background:linear-gradient(90deg,#5bbcf8,#2d9be0);}
+.game-card.purple::before{background:linear-gradient(90deg,#a78bfa,#7c3aed);}
 
-/* side illustrations */
-.hero-dog {
-  position: absolute;
-  left: 10px; bottom: 0;
-  font-size: clamp(48px, 10vw, 72px);
-  line-height: 1;
-  filter: drop-shadow(2px 0 0 #fff) drop-shadow(-2px 0 0 #fff);
+.game-icon{font-size:36px;line-height:1;}
+.game-title{font-size:17px;font-weight:800;color:var(--brown);}
+.game-desc{font-size:12px;color:#999;line-height:1.5;}
+.game-badge{
+  font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;
+  align-self:flex-start;
 }
-.hero-bowl {
-  position: absolute;
-  right: 10px; bottom: 0;
-  font-size: clamp(40px, 8vw, 60px);
-  line-height: 1;
-  filter: drop-shadow(2px 0 0 #fff) drop-shadow(-2px 0 0 #fff);
-}
+.badge-hot{background:#ffe0e0;color:#e83030;}
+.badge-new{background:#e0f0ff;color:#2d9be0;}
+.badge-fun{background:#e8ffe0;color:#29a85e;}
+.badge-brain{background:#f0e0ff;color:#7c3aed;}
 
-/* floating deco stars/hearts */
-.deco {
-  position: absolute;
-  font-size: 18px;
-  pointer-events: none;
-  animation: float 3s ease-in-out infinite;
+.play-btn-wrap{
+  width:100%;display:flex;justify-content:flex-end;margin-top:4px;
 }
-.deco:nth-child(1){top:14px;left:18%;animation-delay:0s;}
-.deco:nth-child(2){top:20px;right:20%;animation-delay:.6s;}
-.deco:nth-child(3){top:50px;left:30%;animation-delay:1.2s;}
-.deco:nth-child(4){top:44px;right:30%;animation-delay:.9s;}
-@keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-6px);}}
-
-.hero-title {
-  position: relative;
-  text-align: center;
-  z-index: 1;
-  margin-bottom: 4px;
-}
-.hero-title h1 {
-  font-size: clamp(26px, 6vw, 40px);
-  font-weight: 900;
-  color: var(--brown);
-  text-shadow:
-    3px 3px 0 #fff,
-    -1px -1px 0 #fff,
-    1px -1px 0 #fff,
-    -1px 1px 0 #fff;
-  letter-spacing: -1px;
-  line-height: 1.15;
-}
-.hero-title h1 em {
-  font-style: normal;
-  color: var(--pink-d);
-  -webkit-text-stroke: 1px #fff;
-}
-.hero-sub {
-  position: relative;
-  z-index: 1;
-  font-size: 13px;
-  color: var(--brown-m);
-  font-weight: 600;
-  display: flex; align-items: center; gap: 5px;
-}
-
-/* ─────────────────────────────────────────
-   STATS
-───────────────────────────────────────── */
-.stats {
-  display: flex;
-  gap: 10px;
-  padding: 16px 16px 0;
-  width: 100%;
-  max-width: 720px;
-  justify-content: center;
-}
-.stat-card {
-  flex: 1;
-  max-width: 160px;
-  background: var(--white);
-  border-radius: 18px;
-  box-shadow: var(--shadow);
-  padding: 12px 10px 10px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-.stat-icon {
-  width: 42px; height: 42px;
-  border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 20px;
-  flex-shrink: 0;
-}
-.stat-icon.pink  { background: linear-gradient(135deg,#ff9ac9,var(--pink-d)); }
-.stat-icon.blue  { background: linear-gradient(135deg,#7dd3fc,var(--blue-d)); }
-.stat-icon.green { background: linear-gradient(135deg,#86efac,var(--green-d)); }
-
-.stat-text { min-width: 0; }
-.stat-label {
-  font-size: 11px;
-  color: #aaa;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: .8px;
-}
-.stat-value {
-  font-size: 22px;
-  font-weight: 900;
-  line-height: 1.1;
-  color: var(--brown);
-}
-
-/* ─────────────────────────────────────────
-   PLAY BUTTON
-───────────────────────────────────────── */
-.play-btn {
-  margin: 16px auto 0;
-  display: block;
-  background: linear-gradient(135deg, #ff8fbf, var(--pink-d));
-  color: #fff;
-  border: none;
-  border-radius: 50px;
-  padding: 13px 38px;
-  font-size: 16px;
-  font-weight: 800;
-  cursor: pointer;
-  box-shadow: 0 5px 18px rgba(228,85,138,.4);
-  transition: transform .15s, box-shadow .15s;
-  letter-spacing: .3px;
-}
-.play-btn:hover  { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(228,85,138,.45); }
-.play-btn:active { transform: translateY(0); }
-
-/* ─────────────────────────────────────────
-   CARD GRID
-───────────────────────────────────────── */
-.grid-wrap {
-  width: 100%;
-  max-width: 520px;
-  padding: 16px 14px 10px;
-}
-.grid {
-  display: grid;
-  grid-template-columns: repeat(4,1fr);
-  gap: 10px;
-}
-
-/* ─────────────────────────────────────────
-   CARDS
-───────────────────────────────────────── */
-.card {
-  aspect-ratio: 1;
-  perspective: 700px;
-  cursor: pointer;
-}
-.card-inner {
-  width:100%; height:100%;
-  position: relative;
-  transform-style: preserve-3d;
-  transition: transform .42s cubic-bezier(.4,0,.2,1);
-  border-radius: 16px;
-}
-.card.flipped .card-inner,
-.card.matched .card-inner { transform: rotateY(180deg); }
-
-.card-face {
-  position: absolute; inset: 0;
-  border-radius: 16px;
-  display: flex; align-items: center; justify-content: center;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-  user-select: none;
-  box-shadow: 0 4px 14px rgba(90,52,25,.18);
-}
-
-/* BACK — golden paw pattern */
-.card-back {
-  background-color: var(--amber);
-  background-image:
-    /* paw SVG tiled */
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='36'%3E%3Cellipse cx='18' cy='22' rx='7' ry='8.5' fill='%23fff' opacity='.22'/%3E%3Ccircle cx='10' cy='13' r='3.5' fill='%23fff' opacity='.22'/%3E%3Ccircle cx='26' cy='13' r='3.5' fill='%23fff' opacity='.22'/%3E%3Ccircle cx='5'  cy='21' r='2.8' fill='%23fff' opacity='.18'/%3E%3Ccircle cx='31' cy='21' r='2.8' fill='%23fff' opacity='.18'/%3E%3C/svg%3E");
-  background-size: 36px 36px;
-  border: 3px solid var(--amber-d);
-  font-size: clamp(28px,8vw,42px);
-  /* white paw emoji */
-}
-.card-back::after {
-  content: '🐾';
-  font-size: clamp(28px,8vw,40px);
-  filter: drop-shadow(0 1px 2px rgba(0,0,0,.2));
-}
-
-/* FRONT */
-.card-front {
-  background: var(--white);
-  border: 3px solid #ffe0b0;
-  transform: rotateY(180deg);
-  font-size: clamp(30px,9vw,46px);
-  transition: background .3s, border-color .3s;
-}
-.card.matched .card-front {
-  background: linear-gradient(135deg,#d4f7df,#a8efc0);
-  border-color: #6dd49a;
-}
-
-/* pulse on match */
-.card.matched .card-inner {
-  animation: matchPulse .4s ease forwards;
-}
-@keyframes matchPulse {
-  0%   { transform: rotateY(180deg) scale(1); }
-  50%  { transform: rotateY(180deg) scale(1.08); }
-  100% { transform: rotateY(180deg) scale(1); }
-}
-
-/* ─────────────────────────────────────────
-   MODAL
-───────────────────────────────────────── */
-.overlay {
-  display: none;
-  position: fixed; inset: 0;
-  background: rgba(80,40,10,.5);
-  backdrop-filter: blur(6px);
-  z-index: 200;
-  align-items: center; justify-content: center;
-  padding: 20px;
-}
-.overlay.show { display: flex; }
-
-.modal {
-  background: var(--white);
-  border-radius: 28px;
-  padding: 36px 28px 28px;
-  max-width: 340px; width: 100%;
-  text-align: center;
-  box-shadow: 0 20px 60px rgba(80,40,10,.3);
-  animation: popIn .38s cubic-bezier(.34,1.56,.64,1);
-}
-@keyframes popIn {
-  from { transform: scale(.65); opacity: 0; }
-  to   { transform: scale(1);   opacity: 1; }
-}
-
-.modal-trophy { font-size: 60px; margin-bottom: 6px; display: block; }
-.modal h2 { font-size: 24px; font-weight: 900; color: var(--brown); margin-bottom: 16px; }
-
-.modal-stats {
-  display: flex; gap: 10px; margin-bottom: 16px;
-}
-.modal-stat {
-  flex:1; background: var(--cream); border-radius: 14px;
-  padding: 10px 6px;
-}
-.modal-stat .ms-label { font-size: 11px; color:#aaa; font-weight:700; letter-spacing:.8px; text-transform:uppercase; }
-.modal-stat .ms-value { font-size: 22px; font-weight:900; color:var(--brown); }
-
-.rank-badge {
-  background: linear-gradient(135deg,#ffe066,#f4a535);
-  border-radius: 30px;
-  padding: 8px 18px;
-  display: inline-block;
-  font-size: 14px;
-  font-weight: 800;
-  color: var(--brown);
-  margin-bottom: 20px;
-  box-shadow: 0 3px 10px rgba(244,165,53,.35);
-}
-
-.modal-ad {
-  margin: 4px 0 20px;
-  min-height: 60px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.modal-btns { display: flex; flex-direction: column; gap: 10px; }
-
-.btn-share {
-  background: linear-gradient(135deg,#5de089,var(--green-d));
-  color:#fff; border:none; border-radius:50px;
-  padding:13px; font-size:15px; font-weight:800;
-  cursor:pointer; box-shadow:0 5px 14px rgba(41,168,94,.35);
+.play-btn-sm{
+  background:linear-gradient(135deg,#f4a261,#e76f51);
+  color:#fff;border:none;border-radius:30px;
+  padding:7px 18px;font-size:13px;font-weight:700;
+  cursor:pointer;text-decoration:none;
   transition:transform .15s;
+  display:inline-block;
 }
-.btn-share:hover { transform: translateY(-2px); }
+.game-card.pink .play-btn-sm{background:linear-gradient(135deg,#ff8fbf,#e8558a);}
+.game-card.blue .play-btn-sm{background:linear-gradient(135deg,#7dd3fc,#2d9be0);}
+.game-card.purple .play-btn-sm{background:linear-gradient(135deg,#c4b5fd,#7c3aed);}
+.play-btn-sm:hover{transform:scale(1.05);}
 
-.btn-again {
-  background: linear-gradient(135deg,#ff8fbf,var(--pink-d));
-  color:#fff; border:none; border-radius:50px;
-  padding:13px; font-size:15px; font-weight:800;
-  cursor:pointer; box-shadow:0 5px 14px rgba(228,85,138,.35);
-  transition:transform .15s;
+/* FOOTER */
+footer{
+  margin-top:32px;font-size:12px;color:#bbb;text-align:center;
 }
-.btn-again:hover { transform: translateY(-2px); }
-
-/* ─────────────────────────────────────────
-   TOAST
-───────────────────────────────────────── */
-.toast {
-  position: fixed; bottom:28px; left:50%;
-  transform: translateX(-50%) translateY(8px);
-  background: rgba(40,20,5,.85);
-  color:#fff; padding:10px 22px;
-  border-radius:50px; font-size:14px; font-weight:700;
-  opacity:0; pointer-events:none;
-  transition: opacity .28s, transform .28s;
-  z-index:300; white-space:nowrap;
-}
-.toast.show { opacity:1; transform:translateX(-50%) translateY(0); }
-
-/* ─────────────────────────────────────────
-   RESPONSIVE
-───────────────────────────────────────── */
-@media (max-width:380px) {
-  .stat-card { padding:10px 8px; gap:7px; }
-  .stat-icon { width:36px; height:36px; font-size:17px; }
-  .stat-value { font-size:19px; }
-  .grid { gap:7px; }
+@media(max-width:420px){
+  .game-grid{grid-template-columns:1fr;}
 }
 </style>
 </head>
 <body>
 
-<!-- ── 애드센스 상단 배너 ─────────────────────── -->
+<!-- 애드센스 상단 -->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7807122304004914"
      crossorigin="anonymous"></script>
-<!-- 강아지카드짝 -->
+<!-- 두뇌 게임 모음-->
 <ins class="adsbygoogle"
      style="display:block"
      data-ad-client="ca-pub-7807122304004914"
@@ -399,58 +142,63 @@ body {
 <script>
      (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
-<!-- ── HERO HEADER ──────────────────────────── -->
-<div class="hero" style="max-width:720px;width:100%;">
-  <!-- deco floats -->
-  <span class="deco">✨</span>
-  <span class="deco">💕</span>
-  <span class="deco">⭐</span>
-  <span class="deco">🌸</span>
 
-  <div class="hero-dog">🐶</div>
-  <div class="hero-bowl">🍖</div>
-
-  <div class="hero-title">
-    <h1>동물 카드 <em>짝 맞추기</em></h1>
-  </div>
-  <p class="hero-sub">❤️ 같은 동물 카드를 찾아 모두 짝을 맞춰보세요! ❤️</p>
+<div class="hero">
+  <h1>🧠 두뇌 게임 모음</h1>
+  <p>무료로 즐기는 중독성 게임들 — 친구와 점수 비교해보세요!</p>
 </div>
 
-<!-- ── STATS ─────────────────────────────────── -->
-<div class="stats">
-  <div class="stat-card">
-    <div class="stat-icon pink">⏱</div>
-    <div class="stat-text">
-      <div class="stat-label">시간</div>
-      <div class="stat-value" id="timer">0:00</div>
-    </div>
-  </div>
-  <div class="stat-card">
-    <div class="stat-icon blue">⭐</div>
-    <div class="stat-text">
-      <div class="stat-label">시도</div>
-      <div class="stat-value" id="moves">0</div>
-    </div>
-  </div>
-  <div class="stat-card">
-    <div class="stat-icon green">✅</div>
-    <div class="stat-text">
-      <div class="stat-label">맞춘 개수</div>
-      <div class="stat-value" id="matched">0/8</div>
-    </div>
+<div class="game-section">
+  <div class="section-title">🔥 인기 게임</div>
+  <div class="game-grid">
+
+    <a class="game-card orange" href="reaction.html">
+      <span class="game-badge badge-hot">🔥 HOT</span>
+      <div class="game-icon">⚡</div>
+      <div class="game-title">반응속도 테스트</div>
+      <div class="game-desc">화면이 바뀌면 즉시 클릭!<br>당신의 반응속도는 몇 ms?</div>
+      <div class="play-btn-wrap">
+        <span class="play-btn-sm">▶ 시작</span>
+      </div>
+    </a>
+
+    <a class="game-card pink" href="stroop.html">
+      <span class="game-badge badge-fun">😂 웃김</span>
+      <div class="game-icon">🎨</div>
+      <div class="game-title">색깔 스트룹 테스트</div>
+      <div class="game-desc">뇌가 헷갈려서 웃음 폭발!<br>글자색을 골라야 해요</div>
+      <div class="play-btn-wrap">
+        <span class="play-btn-sm">▶ 시작</span>
+      </div>
+    </a>
+
+    <a class="game-card blue" href="click.html">
+      <span class="game-badge badge-new">🆕 NEW</span>
+      <div class="game-icon">🖱️</div>
+      <div class="game-title">클릭 속도 테스트</div>
+      <div class="game-desc">5초 안에 최대한 빠르게!<br>CPS 몇 점 나오나요?</div>
+      <div class="play-btn-wrap">
+        <span class="play-btn-sm">▶ 시작</span>
+      </div>
+    </a>
+
+    <a class="game-card purple" href="card.html">
+      <span class="game-badge badge-brain">🧠 두뇌</span>
+      <div class="game-icon">🐾</div>
+      <div class="game-title">강아지 카드 짝맞추기</div>
+      <div class="game-desc">귀여운 동물 카드를 뒤집어<br>짝을 모두 찾아보세요!</div>
+      <div class="play-btn-wrap">
+        <span class="play-btn-sm">▶ 시작</span>
+      </div>
+    </a>
+
   </div>
 </div>
 
-<!-- ── PLAY BUTTON ──────────────────────────── -->
-<button class="play-btn" onclick="resetGame()">▶ 새 게임 시작</button>
-
-<!-- ── CARD GRID ─────────────────────────────── -->
-<div class="grid-wrap">
-  <div class="grid" id="grid"></div>
-</div>
-
-<!-- ── 애드센스 하단 배너 ─────────────────────── -->
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7807122304004914"
+<!-- 애드센스 하단 -->
+<div class="ad-wrap" style="padding-top:20px;">
+  <!-- 애드센스 광고 코드 들어갈 자리 -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7807122304004914"
      crossorigin="anonymous"></script>
 <!-- KWAVE CUP 상단 -->
 <ins class="adsbygoogle"
@@ -463,157 +211,8 @@ body {
      (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
 
-<!-- ── RESULT MODAL ──────────────────────────── -->
-<div class="overlay" id="overlay">
-  <div class="modal">
-    <span class="modal-trophy">🏆</span>
-    <h2>모두 찾았어요!</h2>
-    <div class="modal-stats">
-      <div class="modal-stat">
-        <div class="ms-label">⏱ 시간</div>
-        <div class="ms-value" id="res-time">-</div>
-      </div>
-      <div class="modal-stat">
-        <div class="ms-label">🔄 시도</div>
-        <div class="ms-value" id="res-moves">-</div>
-      </div>
-    </div>
-    <div class="rank-badge" id="rank-msg">⭐ 잘 하셨어요!</div>
-    <div class="modal-ad">
-      <!-- 결과 화면 광고: 이 자리는 새 광고 단위를 만들어서 data-ad-slot을 교체하세요 -->
-      <ins class="adsbygoogle"
-           style="display:block"
-           data-ad-client="ca-pub-7807122304004914"
-           data-ad-slot="7920183152"
-           data-ad-format="auto"
-           data-full-width-responsive="true"></ins>
-      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-    </div>
-    <div class="modal-btns">
-      <button class="btn-share" onclick="shareResult()">🔗 기록 공유하기</button>
-      <button class="btn-again" onclick="closeModal()">🔄 다시 하기</button>
-    </div>
-  </div>
-</div>
 
-<div class="toast" id="toast"></div>
+<footer>© 2026 Brain Games · 무료 두뇌 게임 모음</footer>
 
-<!-- ── GAME LOGIC ──────────────────────────── -->
-<script>
-const EMOJIS = ['🐶','🐱','🦊','🐰','🐻','🐼','🐨','🦁'];
-const SITE_URL = location.href;
-
-let flipped=[], matchedCount=0, moves=0, seconds=0;
-let timerInterval=null, gameStarted=false, locked=false;
-
-function shuffle(arr){
-  return [...arr,...arr].sort(()=>Math.random()-.5);
-}
-function fmt(s){
-  return `${Math.floor(s/60)}:${String(s%60).padStart(2,'0')}`;
-}
-function startTimer(){
-  if(timerInterval) return;
-  timerInterval=setInterval(()=>{
-    seconds++;
-    document.getElementById('timer').textContent=fmt(seconds);
-  },1000);
-}
-function stopTimer(){
-  clearInterval(timerInterval); timerInterval=null;
-}
-function syncStats(){
-  document.getElementById('moves').textContent=moves;
-  document.getElementById('matched').textContent=`${matchedCount}/8`;
-}
-function getRank(m,s){
-  if(m<=14&&s<=30)  return '⭐⭐⭐ 천재 동물 탐정!';
-  if(m<=20&&s<=60)  return '⭐⭐ 훌륭한 기억력!';
-  if(m<=30)          return '⭐ 좋은 실력이에요!';
-  return '🐾 연습하면 더 잘할 수 있어요!';
-}
-
-function buildGrid(){
-  const grid=document.getElementById('grid');
-  grid.innerHTML='';
-  shuffle(EMOJIS).forEach((emoji,i)=>{
-    const card=document.createElement('div');
-    card.className='card';
-    card.dataset.emoji=emoji;
-    card.innerHTML=`
-      <div class="card-inner">
-        <div class="card-face card-back"></div>
-        <div class="card-face card-front">${emoji}</div>
-      </div>`;
-    card.addEventListener('click',()=>onFlip(card));
-    grid.appendChild(card);
-  });
-}
-
-function onFlip(card){
-  if(locked) return;
-  if(card.classList.contains('flipped')||card.classList.contains('matched')) return;
-  if(!gameStarted){gameStarted=true;startTimer();}
-
-  card.classList.add('flipped');
-  flipped.push(card);
-
-  if(flipped.length===2){
-    moves++; syncStats(); locked=true;
-    const [a,b]=flipped;
-    if(a.dataset.emoji===b.dataset.emoji){
-      setTimeout(()=>{
-        a.classList.add('matched'); b.classList.add('matched');
-        a.classList.remove('flipped'); b.classList.remove('flipped');
-        flipped=[]; locked=false; matchedCount++;
-        syncStats();
-        if(matchedCount===8) onClear();
-      },480);
-    } else {
-      setTimeout(()=>{
-        a.classList.remove('flipped'); b.classList.remove('flipped');
-        flipped=[]; locked=false;
-      },900);
-    }
-  }
-}
-
-function onClear(){
-  stopTimer();
-  document.getElementById('res-time').textContent=fmt(seconds);
-  document.getElementById('res-moves').textContent=moves+'번';
-  document.getElementById('rank-msg').textContent=getRank(moves,seconds);
-  setTimeout(()=>document.getElementById('overlay').classList.add('show'),350);
-}
-
-function closeModal(){
-  document.getElementById('overlay').classList.remove('show');
-  resetGame();
-}
-
-function resetGame(){
-  document.getElementById('overlay').classList.remove('show');
-  stopTimer();
-  flipped=[]; matchedCount=0; moves=0; seconds=0;
-  gameStarted=false; locked=false;
-  document.getElementById('timer').textContent='0:00';
-  syncStats(); buildGrid();
-}
-
-function shareResult(){
-  const txt=`🐾 동물 카드 짝 맞추기\n⏱ ${fmt(seconds)} / 🔄 ${moves}번 시도\n${getRank(moves,seconds)}\n\n${SITE_URL}`;
-  navigator.clipboard.writeText(txt)
-    .then(()=>toast('📋 클립보드에 복사됐어요!'))
-    .catch(()=>prompt('텍스트를 복사하세요:',txt));
-}
-
-function toast(msg){
-  const el=document.getElementById('toast');
-  el.textContent=msg; el.classList.add('show');
-  setTimeout(()=>el.classList.remove('show'),2600);
-}
-
-resetGame();
-</script>
 </body>
 </html>

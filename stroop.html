@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🎨 색깔 스트룹 테스트 | Brain Games</title>
+<meta name="description" content="글자색을 맞춰야 해요! 뇌가 헷갈려서 웃음 폭발 — 스트룹 효과 무료 게임.">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --cream:#fff8f0;--brown:#5a3419;--brown-m:#8b5e3c;--white:#fff;
+  --red:#ef4444;--blue:#3b82f6;--green:#22c55e;
+  --yellow:#eab308;--purple:#a855f7;--pink:#ec4899;
+}
+body{
+  font-family:'Apple SD Gothic Neo','Malgun Gothic','Segoe UI',sans-serif;
+  background:var(--cream);min-height:100vh;
+  display:flex;flex-direction:column;align-items:center;padding-bottom:40px;
+}
+.ad-wrap{width:100%;max-width:720px;padding:10px 16px;}
+.ad-banner{
+  width:100%;height:72px;background:linear-gradient(90deg,#fdf4ff,#f5e0ff);
+  border:2px dashed #d080f0;border-radius:14px;
+  display:flex;align-items:center;justify-content:center;
+  gap:8px;color:#9040c0;font-size:13px;font-weight:600;
+}
+.nav{width:100%;max-width:500px;padding:12px 16px;display:flex;align-items:center;gap:10px;}
+.nav a{text-decoration:none;color:var(--brown-m);font-size:13px;font-weight:700;}
+.nav-title{font-size:15px;font-weight:900;color:var(--brown);}
+
+.game-wrap{width:100%;max-width:500px;padding:0 16px;}
+
+/* HEADER INFO */
+.info-bar{
+  background:#fff;border-radius:16px;padding:14px 18px;
+  margin-bottom:16px;box-shadow:0 3px 12px rgba(90,52,25,.1);
+  display:flex;justify-content:space-between;align-items:center;
+}
+.info-item{text-align:center;}
+.info-label{font-size:11px;color:#aaa;font-weight:700;text-transform:uppercase;letter-spacing:.8px;}
+.info-value{font-size:22px;font-weight:900;color:var(--brown);}
+.info-value.correct{color:#22c55e;}
+.info-value.wrong{color:#ef4444;}
+
+/* QUESTION CARD */
+.q-card{
+  background:#fff;border-radius:24px;padding:40px 20px;
+  text-align:center;margin-bottom:16px;
+  box-shadow:0 4px 20px rgba(90,52,25,.12);
+  min-height:160px;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:12px;
+}
+.q-instruction{font-size:13px;color:#aaa;font-weight:600;}
+.q-word{font-size:56px;font-weight:900;line-height:1;letter-spacing:-2px;}
+.q-sub{font-size:13px;color:#bbb;}
+
+/* COLOR BUTTONS */
+.color-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:10px;
+  margin-bottom:16px;
+}
+.color-btn{
+  border:none;border-radius:16px;padding:18px 10px;
+  font-size:15px;font-weight:800;color:#fff;
+  cursor:pointer;transition:transform .12s,box-shadow .12s;
+  box-shadow:0 4px 12px rgba(0,0,0,.15);
+  text-shadow:0 1px 4px rgba(0,0,0,.2);
+}
+.color-btn:active{transform:scale(.95);}
+.color-btn:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(0,0,0,.2);}
+.color-btn.correct-flash{animation:correctFlash .3s ease;}
+.color-btn.wrong-flash{animation:wrongFlash .3s ease;}
+@keyframes correctFlash{0%{transform:scale(1);}50%{transform:scale(1.08);}100%{transform:scale(1);}}
+@keyframes wrongFlash{0%{transform:translateX(0);}25%{transform:translateX(-6px);}75%{transform:translateX(6px);}100%{transform:translateX(0);}}
+
+.cb-red   {background:var(--red);}
+.cb-blue  {background:var(--blue);}
+.cb-green {background:var(--green);}
+.cb-yellow{background:var(--yellow);}
+.cb-purple{background:var(--purple);}
+.cb-pink  {background:var(--pink);}
+
+/* FEEDBACK OVERLAY */
+.feedback{
+  position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);
+  font-size:80px;pointer-events:none;opacity:0;transition:opacity .1s;
+  z-index:100;
+}
+.feedback.show{opacity:1;}
+
+/* RESULT */
+.result-card{
+  background:#fff;border-radius:18px;padding:20px;
+  box-shadow:0 3px 12px rgba(90,52,25,.1);margin-bottom:16px;display:none;
+}
+.result-title{font-size:15px;font-weight:800;color:var(--brown);margin-bottom:14px;}
+.result-row{display:flex;gap:10px;margin-bottom:12px;}
+.res-box{flex:1;background:var(--cream);border-radius:14px;padding:12px 8px;text-align:center;}
+.res-label{font-size:11px;color:#aaa;font-weight:700;text-transform:uppercase;}
+.res-val{font-size:24px;font-weight:900;color:var(--brown);}
+.res-val.g{color:var(--green);}
+.res-val.r{color:var(--red);}
+.accuracy-bar-bg{height:12px;background:#f0f0f0;border-radius:10px;overflow:hidden;margin-bottom:12px;}
+.accuracy-bar{height:100%;background:linear-gradient(90deg,#5de089,#22c55e);border-radius:10px;transition:width .6s ease;}
+.rank-badge{
+  background:linear-gradient(135deg,#fcd34d,#f4a535);border-radius:30px;
+  padding:8px 18px;font-size:14px;font-weight:800;color:var(--brown);
+  box-shadow:0 3px 10px rgba(244,165,53,.35);width:100%;text-align:center;display:block;
+}
+
+.btn-row{display:flex;gap:10px;margin-bottom:20px;}
+.btn{flex:1;padding:14px;border:none;border-radius:50px;font-size:15px;font-weight:800;cursor:pointer;transition:transform .15s;}
+.btn:hover{transform:translateY(-2px);}
+.btn-share{background:linear-gradient(135deg,#5de089,#29a85e);color:#fff;box-shadow:0 4px 14px rgba(41,168,94,.35);}
+.btn-retry{background:linear-gradient(135deg,#c4b5fd,#7c3aed);color:#fff;box-shadow:0 4px 14px rgba(124,58,237,.35);}
+
+.other-games{margin-top:4px;}
+.other-title{font-size:14px;font-weight:800;color:var(--brown-m);margin-bottom:10px;}
+.other-list{display:flex;flex-direction:column;gap:8px;}
+.other-item{
+  background:#fff;border-radius:14px;padding:12px 16px;
+  display:flex;align-items:center;gap:12px;text-decoration:none;
+  box-shadow:0 2px 8px rgba(90,52,25,.08);transition:transform .15s;
+}
+.other-item:hover{transform:translateX(4px);}
+.other-icon{font-size:24px;}.other-name{font-size:14px;font-weight:700;color:var(--brown);}
+.other-arrow{margin-left:auto;color:#ccc;}
+
+.toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(8px);
+background:rgba(40,20,5,.85);color:#fff;padding:10px 22px;
+border-radius:50px;font-size:14px;font-weight:700;opacity:0;pointer-events:none;
+transition:opacity .28s,transform .28s;z-index:300;white-space:nowrap;}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+.start-overlay{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:14px;
+}
+.start-btn{
+  background:linear-gradient(135deg,#c4b5fd,#7c3aed);
+  color:#fff;border:none;border-radius:50px;
+  padding:16px 48px;font-size:17px;font-weight:800;cursor:pointer;
+  box-shadow:0 6px 20px rgba(124,58,237,.4);transition:transform .15s;
+}
+.start-btn:hover{transform:translateY(-2px);}
+</style>
+</head>
+<body>
+
+<div class="ad-wrap" style="padding-top:12px;">
+  <!-- 애드센스 광고 코드 들어갈 자리 -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7807122304004914"
+     crossorigin="anonymous"></script>
+<!-- 강아지카드짝 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-7807122304004914"
+     data-ad-slot="1032708154"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+<div class="nav">
+  <a href="index.html">🏠 홈</a>
+  <span style="color:#ddd;">›</span>
+  <span class="nav-title">🎨 색깔 스트룹 테스트</span>
+</div>
+
+<div class="game-wrap">
+
+  <div class="info-bar">
+    <div class="info-item">
+      <div class="info-label">⏱ 시간</div>
+      <div class="info-value" id="timer-val">30</div>
+    </div>
+    <div class="info-item">
+      <div class="info-label">✅ 정답</div>
+      <div class="info-value correct" id="correct-val">0</div>
+    </div>
+    <div class="info-item">
+      <div class="info-label">❌ 오답</div>
+      <div class="info-value wrong" id="wrong-val">0</div>
+    </div>
+    <div class="info-item">
+      <div class="info-label">📋 문제</div>
+      <div class="info-value" id="q-num">0/20</div>
+    </div>
+  </div>
+
+  <div class="q-card" id="q-card">
+    <div class="start-overlay" id="start-overlay">
+      <div style="font-size:42px;">🎨</div>
+      <div style="font-size:17px;font-weight:900;color:var(--brown);">색깔 스트룹 테스트</div>
+      <div style="font-size:13px;color:#999;text-align:center;line-height:1.6;">
+        글자의 <strong>색깔</strong>을 선택하세요<br>
+        글자의 내용이 아닙니다!
+      </div>
+      <button class="start-btn" onclick="startGame()">▶ 시작하기</button>
+    </div>
+  </div>
+
+  <div class="color-grid" id="color-grid" style="display:none;">
+    <button class="color-btn cb-red"    onclick="answer('빨강')">빨강</button>
+    <button class="color-btn cb-blue"   onclick="answer('파랑')">파랑</button>
+    <button class="color-btn cb-green"  onclick="answer('초록')">초록</button>
+    <button class="color-btn cb-yellow" onclick="answer('노랑')">노랑</button>
+    <button class="color-btn cb-purple" onclick="answer('보라')">보라</button>
+    <button class="color-btn cb-pink"   onclick="answer('분홍')">분홍</button>
+  </div>
+
+  <div class="result-card" id="result-card">
+    <div class="result-title">🏁 결과</div>
+    <div class="result-row">
+      <div class="res-box"><div class="res-label">✅ 정답</div><div class="res-val g" id="res-correct">0</div></div>
+      <div class="res-box"><div class="res-label">❌ 오답</div><div class="res-val r" id="res-wrong">0</div></div>
+      <div class="res-box"><div class="res-label">🎯 정확도</div><div class="res-val" id="res-acc">0%</div></div>
+    </div>
+    <div class="accuracy-bar-bg"><div class="accuracy-bar" id="acc-bar" style="width:0%;"></div></div>
+    <span class="rank-badge" id="res-rank">-</span>
+  </div>
+
+  <div class="btn-row" id="btn-row" style="display:none;">
+    <button class="btn btn-share" onclick="shareResult()">🔗 공유</button>
+    <button class="btn btn-retry" onclick="resetGame()">🔄 다시하기</button>
+  </div>
+
+  <div class="other-games">
+    <div class="other-title">다른 게임도 해보세요 👇</div>
+    <div class="other-list">
+      <a class="other-item" href="reaction.html"><span class="other-icon">⚡</span><span class="other-name">반응속도 테스트</span><span class="other-arrow">›</span></a>
+      <a class="other-item" href="click.html"><span class="other-icon">🖱️</span><span class="other-name">클릭 속도 테스트</span><span class="other-arrow">›</span></a>
+      <a class="other-item" href="card.html"><span class="other-icon">🐾</span><span class="other-name">강아지 카드 짝맞추기</span><span class="other-arrow">›</span></a>
+    </div>
+  </div>
+
+</div>
+
+<div class="ad-wrap" style="padding-top:20px;">
+  <!-- 애드센스 광고 코드 들어갈 자리 -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7807122304004914"
+     crossorigin="anonymous"></script>
+<!-- KWAVE CUP 상단 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-7807122304004914"
+     data-ad-slot="3175289832"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+<div class="feedback" id="feedback"></div>
+<div class="toast" id="toast"></div>
+
+<script>
+const COLORS = [
+  {name:'빨강', hex:'#ef4444'},
+  {name:'파랑',  hex:'#3b82f6'},
+  {name:'초록', hex:'#22c55e'},
+  {name:'노랑', hex:'#eab308'},
+  {name:'보라', hex:'#a855f7'},
+  {name:'분홍', hex:'#ec4899'},
+];
+const TOTAL_Q = 20;
+const TIME    = 30;
+
+let correctCount=0, wrongCount=0, qCount=0;
+let currentColor=null, timerInterval=null, remaining=TIME;
+let gameActive=false;
+
+const qCard    = document.getElementById('q-card');
+const colorGrid= document.getElementById('color-grid');
+const timerEl  = document.getElementById('timer-val');
+const correctEl= document.getElementById('correct-val');
+const wrongEl  = document.getElementById('wrong-val');
+const qNumEl   = document.getElementById('q-num');
+const resCard  = document.getElementById('result-card');
+const btnRow   = document.getElementById('btn-row');
+
+function startGame(){
+  correctCount=wrongCount=qCount=0; remaining=TIME; gameActive=true;
+  document.getElementById('start-overlay').style.display='none';
+  colorGrid.style.display='grid';
+  timerInterval=setInterval(()=>{
+    remaining--;
+    timerEl.textContent=remaining;
+    if(remaining<=0){clearInterval(timerInterval);endGame();}
+  },1000);
+  nextQ();
+}
+
+function nextQ(){
+  if(qCount>=TOTAL_Q){clearInterval(timerInterval);endGame();return;}
+  // pick random word and random color (intentionally mismatched most of the time)
+  const wordIdx  = Math.floor(Math.random()*COLORS.length);
+  const colorIdx = Math.random()<0.3 ? wordIdx : (()=>{
+    let i; do{i=Math.floor(Math.random()*COLORS.length);}while(i===wordIdx); return i;
+  })();
+  currentColor = COLORS[colorIdx].name;
+  qCard.innerHTML=`
+    <div class="q-instruction">글자의 <strong>색깔</strong>을 선택하세요</div>
+    <div class="q-word" style="color:${COLORS[colorIdx].hex}">${COLORS[wordIdx].name}</div>
+    <div class="q-sub">${qCount+1} / ${TOTAL_Q}</div>`;
+  qNumEl.textContent=`${qCount+1}/${TOTAL_Q}`;
+}
+
+function answer(chosen){
+  if(!gameActive) return;
+  qCount++;
+  if(chosen===currentColor){
+    correctCount++;
+    correctEl.textContent=correctCount;
+    showFeedback('✅');
+  } else {
+    wrongCount++;
+    wrongEl.textContent=wrongCount;
+    showFeedback('❌');
+  }
+  nextQ();
+}
+
+function showFeedback(emoji){
+  const el=document.getElementById('feedback');
+  el.textContent=emoji;el.classList.add('show');
+  setTimeout(()=>el.classList.remove('show'),300);
+}
+
+function endGame(){
+  gameActive=false;
+  colorGrid.style.display='none';
+  qCard.innerHTML=`<div style="font-size:48px;">🏁</div><div style="font-size:18px;font-weight:900;color:var(--brown);">게임 종료!</div>`;
+  const total=correctCount+wrongCount;
+  const acc=total>0?Math.round(correctCount/total*100):0;
+  document.getElementById('res-correct').textContent=correctCount;
+  document.getElementById('res-wrong').textContent=wrongCount;
+  document.getElementById('res-acc').textContent=acc+'%';
+  setTimeout(()=>document.getElementById('acc-bar').style.width=acc+'%',100);
+  document.getElementById('res-rank').textContent=getRank(acc,correctCount);
+  resCard.style.display='block';
+  btnRow.style.display='flex';
+}
+
+function getRank(acc,correct){
+  if(acc>=95&&correct>=18) return '🏆 스트룹 마스터! 뇌가 남다릅니다';
+  if(acc>=85) return '⭐⭐ 두뇌 회전이 빠르네요!';
+  if(acc>=70) return '⭐ 평균보다 잘 하셨어요!';
+  if(acc>=50) return '😊 절반은 맞췄어요!';
+  return '🐢 뇌가 많이 헷갈렸군요 — 다시 도전!';
+}
+
+function resetGame(){
+  clearInterval(timerInterval);
+  correctCount=wrongCount=qCount=0; remaining=TIME; gameActive=false;
+  correctEl.textContent=wrongEl.textContent='0';
+  timerEl.textContent=TIME; qNumEl.textContent='0/'+TOTAL_Q;
+  resCard.style.display=btnRow.style.display='none';
+  colorGrid.style.display='none';
+  qCard.innerHTML=`<div class="start-overlay" id="start-overlay">
+    <div style="font-size:42px;">🎨</div>
+    <div style="font-size:17px;font-weight:900;color:var(--brown);">색깔 스트룹 테스트</div>
+    <div style="font-size:13px;color:#999;text-align:center;line-height:1.6;">글자의 <strong>색깔</strong>을 선택하세요<br>글자의 내용이 아닙니다!</div>
+    <button class="start-btn" onclick="startGame()">▶ 시작하기</button>
+  </div>`;
+}
+
+function shareResult(){
+  const total=correctCount+wrongCount;
+  const acc=total>0?Math.round(correctCount/total*100):0;
+  const txt=`🎨 색깔 스트룹 테스트\n✅ 정답: ${correctCount}개\n🎯 정확도: ${acc}%\n${getRank(acc,correctCount)}\n\n${location.href}`;
+  navigator.clipboard.writeText(txt).then(()=>toast('📋 클립보드에 복사됐어요!')).catch(()=>prompt('복사하세요:',txt));
+}
+function toast(msg){
+  const el=document.getElementById('toast');
+  el.textContent=msg;el.classList.add('show');
+  setTimeout(()=>el.classList.remove('show'),2600);
+}
+</script>
+</body>
+</html>

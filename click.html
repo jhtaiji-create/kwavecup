@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🖱️ 클릭 속도 테스트 (CPS) | Brain Games</title>
+<meta name="description" content="5초 안에 최대한 빠르게 클릭! CPS(초당 클릭수) 측정 무료 게임.">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --cream:#fff8f0;--brown:#5a3419;--brown-m:#8b5e3c;
+  --blue:#5bbcf8;--blue-d:#2d9be0;--white:#fff;
+}
+body{
+  font-family:'Apple SD Gothic Neo','Malgun Gothic','Segoe UI',sans-serif;
+  background:var(--cream);min-height:100vh;
+  display:flex;flex-direction:column;align-items:center;padding-bottom:40px;
+}
+.ad-wrap{width:100%;max-width:720px;padding:10px 16px;}
+.ad-banner{
+  width:100%;height:72px;background:linear-gradient(90deg,#e8f4ff,#cce8ff);
+  border:2px dashed #70b8f0;border-radius:14px;
+  display:flex;align-items:center;justify-content:center;
+  gap:8px;color:#2d7ab8;font-size:13px;font-weight:600;
+}
+.nav{width:100%;max-width:500px;padding:12px 16px;display:flex;align-items:center;gap:10px;}
+.nav a{text-decoration:none;color:var(--brown-m);font-size:13px;font-weight:700;}
+.nav-title{font-size:15px;font-weight:900;color:var(--brown);}
+
+.game-wrap{width:100%;max-width:500px;padding:0 16px;}
+
+/* TIME BAR */
+.time-bar-wrap{
+  background:#fff;border-radius:16px;padding:14px 18px;
+  margin-bottom:16px;box-shadow:0 3px 12px rgba(90,52,25,.1);
+}
+.time-label{
+  display:flex;justify-content:space-between;align-items:center;
+  margin-bottom:8px;
+}
+.time-label span{font-size:13px;font-weight:700;color:var(--brown-m);}
+.time-label strong{font-size:22px;font-weight:900;color:var(--blue-d);}
+.bar-bg{height:14px;background:#e8f4ff;border-radius:10px;overflow:hidden;}
+.bar-fill{height:100%;background:linear-gradient(90deg,var(--blue),var(--blue-d));border-radius:10px;transition:width .1s linear;}
+
+/* STATS */
+.stats-row{display:flex;gap:10px;margin-bottom:16px;}
+.stat-box{
+  flex:1;background:#fff;border-radius:16px;padding:14px 10px;
+  text-align:center;box-shadow:0 3px 12px rgba(90,52,25,.1);
+}
+.stat-label{font-size:11px;color:#aaa;font-weight:700;text-transform:uppercase;letter-spacing:.8px;}
+.stat-value{font-size:22px;font-weight:900;color:var(--brown);}
+
+/* CLICK BUTTON */
+.click-zone{
+  width:100%;
+  background:linear-gradient(135deg,#7dd3fc,var(--blue-d));
+  border:none;border-radius:24px;
+  padding:60px 20px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:10px;cursor:pointer;
+  box-shadow:0 8px 24px rgba(45,155,224,.35);
+  transition:transform .08s,box-shadow .08s;
+  margin-bottom:16px;
+  user-select:none;-webkit-user-select:none;
+}
+.click-zone:active{transform:scale(.97);box-shadow:0 4px 12px rgba(45,155,224,.25);}
+.click-zone.idle{background:linear-gradient(135deg,#cbd5e1,#94a3b8);box-shadow:none;}
+.click-zone.done{background:linear-gradient(135deg,#818cf8,#6366f1);}
+.click-emoji{font-size:56px;line-height:1;pointer-events:none;}
+.click-text{font-size:20px;font-weight:900;color:#fff;pointer-events:none;text-shadow:0 2px 8px rgba(0,0,0,.2);}
+.click-sub{font-size:13px;color:rgba(255,255,255,.85);pointer-events:none;}
+.click-count-big{font-size:72px;font-weight:900;color:#fff;line-height:1;pointer-events:none;text-shadow:0 4px 14px rgba(0,0,0,.2);}
+
+/* RESULTS */
+.result-card{
+  background:#fff;border-radius:18px;padding:20px;
+  box-shadow:0 3px 12px rgba(90,52,25,.1);margin-bottom:16px;
+  display:none;
+}
+.result-title{font-size:15px;font-weight:800;color:var(--brown);margin-bottom:12px;}
+.cps-big{font-size:48px;font-weight:900;color:var(--blue-d);text-align:center;line-height:1;}
+.cps-label{font-size:13px;color:#aaa;text-align:center;margin-bottom:12px;}
+.rank-badge{
+  background:linear-gradient(135deg,#fcd34d,#f4a535);
+  border-radius:30px;padding:8px 18px;display:inline-block;
+  font-size:14px;font-weight:800;color:var(--brown);
+  box-shadow:0 3px 10px rgba(244,165,53,.35);
+  width:100%;text-align:center;
+}
+
+.btn-row{display:flex;gap:10px;margin-bottom:20px;}
+.btn{flex:1;padding:14px;border:none;border-radius:50px;font-size:15px;font-weight:800;cursor:pointer;transition:transform .15s;}
+.btn:hover{transform:translateY(-2px);}
+.btn-share{background:linear-gradient(135deg,#5de089,#29a85e);color:#fff;box-shadow:0 4px 14px rgba(41,168,94,.35);}
+.btn-retry{background:linear-gradient(135deg,#7dd3fc,#2d9be0);color:#fff;box-shadow:0 4px 14px rgba(45,155,224,.35);}
+
+.other-games{margin-top:4px;}
+.other-title{font-size:14px;font-weight:800;color:var(--brown-m);margin-bottom:10px;}
+.other-list{display:flex;flex-direction:column;gap:8px;}
+.other-item{
+  background:#fff;border-radius:14px;padding:12px 16px;
+  display:flex;align-items:center;gap:12px;text-decoration:none;
+  box-shadow:0 2px 8px rgba(90,52,25,.08);transition:transform .15s;
+}
+.other-item:hover{transform:translateX(4px);}
+.other-icon{font-size:24px;}.other-name{font-size:14px;font-weight:700;color:var(--brown);}
+.other-arrow{margin-left:auto;color:#ccc;}
+
+.toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(8px);
+background:rgba(40,20,5,.85);color:#fff;padding:10px 22px;
+border-radius:50px;font-size:14px;font-weight:700;opacity:0;pointer-events:none;
+transition:opacity .28s,transform .28s;z-index:300;white-space:nowrap;}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+</style>
+</head>
+<body>
+
+<div class="ad-wrap" style="padding-top:12px;">
+  <!-- 애드센스 광고 코드 들어갈 자리 -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7807122304004914"
+     crossorigin="anonymous"></script>
+<!-- 강아지카드짝 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-7807122304004914"
+     data-ad-slot="1032708154"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+<div class="nav">
+  <a href="index.html">🏠 홈</a>
+  <span style="color:#ddd;">›</span>
+  <span class="nav-title">🖱️ 클릭 속도 테스트</span>
+</div>
+
+<div class="game-wrap">
+
+  <div class="time-bar-wrap">
+    <div class="time-label">
+      <span>⏱ 남은 시간</span>
+      <strong id="time-display">5.0s</strong>
+    </div>
+    <div class="bar-bg"><div class="bar-fill" id="bar" style="width:100%;"></div></div>
+  </div>
+
+  <div class="stats-row">
+    <div class="stat-box">
+      <div class="stat-label">👆 클릭</div>
+      <div class="stat-value" id="stat-clicks">0</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-label">⚡ CPS</div>
+      <div class="stat-value" id="stat-cps">0</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-label">🏆 최고</div>
+      <div class="stat-value" id="stat-best">-</div>
+    </div>
+  </div>
+
+  <button class="click-zone idle" id="click-zone" onclick="onZoneClick()">
+    <div class="click-emoji" id="zone-emoji">🖱️</div>
+    <div class="click-text" id="zone-text">탭해서 시작!</div>
+    <div class="click-sub" id="zone-sub">5초 동안 최대한 빠르게 클릭하세요</div>
+  </button>
+
+  <div class="result-card" id="result-card">
+    <div class="result-title">🎯 결과</div>
+    <div class="cps-big" id="res-cps">0</div>
+    <div class="cps-label">CPS (초당 클릭수)</div>
+    <div class="rank-badge" id="res-rank">-</div>
+  </div>
+
+  <div class="btn-row" id="btn-row" style="display:none;">
+    <button class="btn btn-share" onclick="shareResult()">🔗 공유</button>
+    <button class="btn btn-retry" onclick="resetGame()">🔄 다시</button>
+  </div>
+
+  <div class="other-games">
+    <div class="other-title">다른 게임도 해보세요 👇</div>
+    <div class="other-list">
+      <a class="other-item" href="reaction.html"><span class="other-icon">⚡</span><span class="other-name">반응속도 테스트</span><span class="other-arrow">›</span></a>
+      <a class="other-item" href="stroop.html"><span class="other-icon">🎨</span><span class="other-name">색깔 스트룹 테스트</span><span class="other-arrow">›</span></a>
+      <a class="other-item" href="card.html"><span class="other-icon">🐾</span><span class="other-name">강아지 카드 짝맞추기</span><span class="other-arrow">›</span></a>
+    </div>
+  </div>
+
+</div>
+
+<div class="ad-wrap" style="padding-top:20px;">
+  <!-- 애드센스 광고 코드 들어갈 자리 -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7807122304004914"
+     crossorigin="anonymous"></script>
+<!-- KWAVE CUP 상단 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-7807122304004914"
+     data-ad-slot="3175289832"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const DURATION = 5000;
+let state = 'idle'; // idle | running | done
+let clicks = 0, startTime = 0, bestCPS = 0;
+let raf = null;
+
+const zone     = document.getElementById('click-zone');
+const emojiEl  = document.getElementById('zone-emoji');
+const textEl   = document.getElementById('zone-text');
+const subEl    = document.getElementById('zone-sub');
+const barEl    = document.getElementById('bar');
+const timeEl   = document.getElementById('time-display');
+const clicksEl = document.getElementById('stat-clicks');
+const cpsEl    = document.getElementById('stat-cps');
+const bestEl   = document.getElementById('stat-best');
+const resCard  = document.getElementById('result-card');
+const resCPS   = document.getElementById('res-cps');
+const resRank  = document.getElementById('res-rank');
+const btnRow   = document.getElementById('btn-row');
+
+function onZoneClick(){
+  if(state === 'idle'){
+    startGame(); return;
+  }
+  if(state === 'running'){
+    clicks++;
+    clicksEl.textContent = clicks;
+    const elapsed = Date.now() - startTime;
+    const cps = (clicks / (elapsed/1000)).toFixed(1);
+    cpsEl.textContent = cps;
+    // bounce emoji
+    emojiEl.style.transform = 'scale(1.2)';
+    setTimeout(()=>emojiEl.style.transform='',80);
+  }
+}
+
+function startGame(){
+  state = 'running'; clicks = 0; startTime = Date.now();
+  zone.className = 'click-zone';
+  emojiEl.textContent = '👆';
+  textEl.textContent  = '0';
+  subEl.textContent   = '클릭!';
+  clicksEl.textContent = '0';
+  cpsEl.textContent    = '0';
+  resCard.style.display = 'none';
+  btnRow.style.display  = 'none';
+  loop();
+}
+
+function loop(){
+  const now = Date.now();
+  const elapsed = now - startTime;
+  const remain  = Math.max(0, DURATION - elapsed);
+  const pct     = (remain / DURATION) * 100;
+  barEl.style.width = pct + '%';
+  timeEl.textContent = (remain/1000).toFixed(1) + 's';
+  textEl.textContent = clicks;
+
+  if(remain <= 0){
+    endGame(); return;
+  }
+  raf = requestAnimationFrame(loop);
+}
+
+function endGame(){
+  cancelAnimationFrame(raf);
+  state = 'done';
+  const cps = (clicks / (DURATION/1000)).toFixed(1);
+  if(parseFloat(cps) > bestCPS){ bestCPS = parseFloat(cps); bestEl.textContent = cps; }
+  cpsEl.textContent = cps;
+  barEl.style.width = '0%';
+  zone.className = 'click-zone done';
+  emojiEl.textContent = '🏆';
+  textEl.textContent  = clicks + '번!';
+  subEl.textContent   = '';
+  resCPS.textContent  = cps;
+  resRank.textContent = getRank(parseFloat(cps));
+  resCard.style.display = 'block';
+  btnRow.style.display  = 'flex';
+}
+
+function getRank(cps){
+  if(cps >= 12) return '🏆 신의 손! 세계 최상위권';
+  if(cps >= 9)  return '⚡ 번개 손! 상위 5%';
+  if(cps >= 7)  return '🌟 엄청 빠른 손!';
+  if(cps >= 5)  return '👍 평균 이상이에요!';
+  if(cps >= 3)  return '😊 평균 수준이에요';
+  return '🐢 조금 더 연습해봐요!';
+}
+
+function resetGame(){
+  cancelAnimationFrame(raf);
+  state = 'idle'; clicks = 0;
+  zone.className = 'click-zone idle';
+  emojiEl.textContent = '🖱️';
+  textEl.textContent  = '탭해서 시작!';
+  subEl.textContent   = '5초 동안 최대한 빠르게 클릭하세요';
+  barEl.style.width   = '100%';
+  timeEl.textContent  = '5.0s';
+  clicksEl.textContent = cpsEl.textContent = '0';
+  resCard.style.display = btnRow.style.display = 'none';
+}
+
+function shareResult(){
+  const cps = (clicks/(DURATION/1000)).toFixed(1);
+  const txt = `🖱️ 클릭 속도 테스트\n👆 ${clicks}번 클릭\n⚡ CPS: ${cps}\n${getRank(parseFloat(cps))}\n\n${location.href}`;
+  navigator.clipboard.writeText(txt).then(()=>toast('📋 클립보드에 복사됐어요!')).catch(()=>prompt('복사하세요:',txt));
+}
+
+function toast(msg){
+  const el=document.getElementById('toast');
+  el.textContent=msg;el.classList.add('show');
+  setTimeout(()=>el.classList.remove('show'),2600);
+}
+</script>
+</body>
+</html>
