@@ -3,128 +3,299 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>🎮 두뇌 게임 모음 | Brain Games</title>
 <meta name="description" content="반응속도, 클릭속도, 색깔 스트룹, 카드 짝맞추기 등 무료 두뇌 게임 모음. 친구와 점수 비교해보세요!">
+<title>🎮 두뇌 게임 모음 | Brain Games</title>
 <style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-:root{
-  --cream:#fff8f0;--peach:#fde8d0;
-  --amber:#f4a535;--amber-d:#d4891a;
-  --brown:#5a3419;--brown-m:#8b5e3c;
-  --pink:#ff7eb3;--pink-d:#e8558a;
-  --blue:#5bbcf8;--blue-d:#2d9be0;
-  --green:#5dd88a;--green-d:#29a85e;
-  --purple:#a78bfa;--purple-d:#7c3aed;
-  --white:#fff;
-}
-body{
-  font-family:'Apple SD Gothic Neo','Malgun Gothic','Segoe UI',sans-serif;
-  background:var(--cream);
-  min-height:100vh;
-  display:flex;flex-direction:column;align-items:center;
-  padding-bottom:40px;
-}
+  @import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Pretendard:wght@400;500;600;700;800&display=swap');
 
-/* AD */
-.ad-wrap{width:100%;max-width:720px;padding:10px 16px;}
-.ad-banner{
-  width:100%;height:72px;
-  background:linear-gradient(90deg,#fff5e8,#fde8cc);
-  border:2px dashed #e8b870;border-radius:14px;
-  display:flex;align-items:center;justify-content:center;
-  gap:8px;color:#c08040;font-size:13px;font-weight:600;
-}
+  :root{
+    --bg-deep: #1b0f28;
+    --bg-panel: #241432;
+    --bg-panel-2: #2e1a3f;
+    --coral: #ff6b4a;
+    --yellow: #ffd23f;
+    --mint: #4ecdc4;
+    --violet: #a78bfa;
+    --cream: #fff8f0;
+    --cream-dim: #cabfd6;
+  }
 
-/* HERO */
-.hero{
-  width:100%;max-width:720px;
-  background:linear-gradient(160deg,#ffe4c8,#ffd4a8 55%,#ffbf80);
-  padding:32px 20px 28px;
-  text-align:center;position:relative;overflow:hidden;
-}
-.hero::before{
-  content:'';position:absolute;inset:0;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Cellipse cx='30' cy='36' rx='10' ry='12' fill='%23f4a535' opacity='.15'/%3E%3Ccircle cx='18' cy='22' r='5' fill='%23f4a535' opacity='.12'/%3E%3Ccircle cx='42' cy='22' r='5' fill='%23f4a535' opacity='.12'/%3E%3C/svg%3E");
-  background-size:60px 60px;pointer-events:none;
-}
-.hero h1{
-  position:relative;font-size:clamp(26px,6vw,40px);font-weight:900;
-  color:var(--brown);
-  text-shadow:3px 3px 0 #fff,-1px -1px 0 #fff,1px -1px 0 #fff,-1px 1px 0 #fff;
-  letter-spacing:-1px;margin-bottom:8px;
-}
-.hero h1 em{font-style:normal;color:var(--pink-d);}
-.hero p{position:relative;font-size:14px;color:var(--brown-m);font-weight:600;}
+  *,*::before,*::after{ box-sizing:border-box; margin:0; padding:0; }
 
-/* GAME GRID */
-.game-section{
-  width:100%;max-width:720px;padding:24px 16px 0;
-}
-.section-title{
-  font-size:16px;font-weight:800;color:var(--brown);
-  margin-bottom:14px;display:flex;align-items:center;gap:6px;
-}
-.game-grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:14px;
-}
-.game-card{
-  background:var(--white);
-  border-radius:20px;
-  padding:22px 18px;
-  text-decoration:none;
-  box-shadow:0 4px 16px rgba(90,52,25,.12);
-  transition:transform .18s,box-shadow .18s;
-  display:flex;flex-direction:column;align-items:flex-start;gap:10px;
-  border:2px solid transparent;
-  position:relative;overflow:hidden;
-}
-.game-card:hover{transform:translateY(-4px);box-shadow:0 10px 28px rgba(90,52,25,.18);}
-.game-card::before{
-  content:'';position:absolute;top:0;left:0;right:0;height:4px;
-  border-radius:20px 20px 0 0;
-}
-.game-card.orange::before{background:linear-gradient(90deg,#f4a535,#e76f51);}
-.game-card.pink::before{background:linear-gradient(90deg,#ff7eb3,#e8558a);}
-.game-card.blue::before{background:linear-gradient(90deg,#5bbcf8,#2d9be0);}
-.game-card.purple::before{background:linear-gradient(90deg,#a78bfa,#7c3aed);}
+  html{ scroll-behavior:smooth; }
 
-.game-icon{font-size:36px;line-height:1;}
-.game-title{font-size:17px;font-weight:800;color:var(--brown);}
-.game-desc{font-size:12px;color:#999;line-height:1.5;}
-.game-badge{
-  font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;
-  align-self:flex-start;
-}
-.badge-hot{background:#ffe0e0;color:#e83030;}
-.badge-new{background:#e0f0ff;color:#2d9be0;}
-.badge-fun{background:#e8ffe0;color:#29a85e;}
-.badge-brain{background:#f0e0ff;color:#7c3aed;}
+  body{
+    background:
+      radial-gradient(circle at 15% 0%, rgba(255,107,74,0.18), transparent 45%),
+      radial-gradient(circle at 85% 15%, rgba(78,205,196,0.14), transparent 40%),
+      var(--bg-deep);
+    color:var(--cream);
+    font-family:'Pretendard', -apple-system, sans-serif;
+    min-height:100vh;
+    padding-bottom:64px;
+    overflow-x:hidden;
+  }
 
-.play-btn-wrap{
-  width:100%;display:flex;justify-content:flex-end;margin-top:4px;
-}
-.play-btn-sm{
-  background:linear-gradient(135deg,#f4a261,#e76f51);
-  color:#fff;border:none;border-radius:30px;
-  padding:7px 18px;font-size:13px;font-weight:700;
-  cursor:pointer;text-decoration:none;
-  transition:transform .15s;
-  display:inline-block;
-}
-.game-card.pink .play-btn-sm{background:linear-gradient(135deg,#ff8fbf,#e8558a);}
-.game-card.blue .play-btn-sm{background:linear-gradient(135deg,#7dd3fc,#2d9be0);}
-.game-card.purple .play-btn-sm{background:linear-gradient(135deg,#c4b5fd,#7c3aed);}
-.play-btn-sm:hover{transform:scale(1.05);}
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    padding:0;
+    text-align:center;
+    min-height:78vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-end;
+    overflow:hidden;
+  }
 
-/* FOOTER */
-footer{
-  margin-top:32px;font-size:12px;color:#bbb;text-align:center;
-}
-@media(max-width:420px){
-  .game-grid{grid-template-columns:1fr;}
-}
+  .hero-bg{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    z-index:0;
+  }
+
+  .hero::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(180deg, rgba(27,15,40,0) 35%, rgba(27,15,40,0.55) 65%, var(--bg-deep) 96%);
+    z-index:1;
+  }
+
+  .hero-content{
+    position:relative;
+    z-index:2;
+    padding:0 20px 34px;
+  }
+
+  .hero-badge{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    background:rgba(255,210,63,0.14);
+    border:1px solid rgba(255,210,63,0.45);
+    color:var(--yellow);
+    font-size:12.5px;
+    font-weight:700;
+    padding:6px 14px;
+    border-radius:999px;
+    letter-spacing:0.02em;
+    margin-bottom:16px;
+    backdrop-filter:blur(4px);
+  }
+
+  .hero-badge .dot{
+    width:6px; height:6px;
+    border-radius:50%;
+    background:var(--yellow);
+    box-shadow:0 0 8px var(--yellow);
+    animation:pulse 1.6s ease-in-out infinite;
+  }
+
+  @keyframes pulse{
+    0%,100%{ opacity:1; transform:scale(1); }
+    50%{ opacity:0.4; transform:scale(0.7); }
+  }
+
+  h1{
+    font-family:'Black Han Sans', sans-serif;
+    font-size:clamp(38px, 11vw, 56px);
+    line-height:1.08;
+    letter-spacing:0.01em;
+    color:var(--cream);
+    text-shadow:0 4px 24px rgba(0,0,0,0.55), 0 0 40px rgba(255,107,74,0.25);
+    margin-bottom:10px;
+  }
+
+  h1 .accent{
+    background:linear-gradient(90deg, var(--coral), var(--yellow) 55%, var(--mint));
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+  }
+
+  .hero-content p{
+    color:var(--cream-dim);
+    font-size:14.5px;
+    font-weight:600;
+    max-width:320px;
+    margin:0 auto;
+  }
+
+  /* ---------- SECTION LABEL ---------- */
+  .section-label{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:0 20px;
+    margin:8px 0 16px;
+  }
+
+  .section-label .flame{ font-size:20px; }
+
+  .section-label h2{
+    font-family:'Black Han Sans', sans-serif;
+    font-size:19px;
+    letter-spacing:0.01em;
+    color:var(--cream);
+  }
+
+  .section-label .count{
+    margin-left:auto;
+    font-size:12px;
+    color:var(--cream-dim);
+    font-weight:600;
+    background:rgba(255,255,255,0.06);
+    padding:4px 10px;
+    border-radius:999px;
+  }
+
+  /* ---------- GAME GRID ---------- */
+  .grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:14px;
+    padding:0 20px;
+  }
+
+  @media (max-width:420px){
+    .grid{ grid-template-columns:1fr; }
+  }
+
+  .cab{
+    position:relative;
+    background:var(--bg-panel);
+    border-radius:20px;
+    padding:20px 18px 18px;
+    text-decoration:none;
+    color:inherit;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    border:1px solid rgba(255,255,255,0.06);
+    overflow:hidden;
+    transition:transform .18s ease, border-color .18s ease, box-shadow .18s ease;
+  }
+
+  .cab::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(180deg, transparent 60%, rgba(0,0,0,0.25) 100%);
+    pointer-events:none;
+  }
+
+  .cab:active{ transform:scale(0.97); }
+
+  .cab.glow-coral:hover{ border-color:rgba(255,107,74,0.55); box-shadow:0 0 0 1px rgba(255,107,74,0.25), 0 12px 28px -12px rgba(255,107,74,0.45); }
+  .cab.glow-mint:hover{ border-color:rgba(78,205,196,0.55); box-shadow:0 0 0 1px rgba(78,205,196,0.25), 0 12px 28px -12px rgba(78,205,196,0.45); }
+  .cab.glow-yellow:hover{ border-color:rgba(255,210,63,0.55); box-shadow:0 0 0 1px rgba(255,210,63,0.25), 0 12px 28px -12px rgba(255,210,63,0.45); }
+  .cab.glow-violet:hover{ border-color:rgba(167,139,250,0.55); box-shadow:0 0 0 1px rgba(167,139,250,0.25), 0 12px 28px -12px rgba(167,139,250,0.45); }
+
+  .cab-tag{
+    align-self:flex-start;
+    font-size:11px;
+    font-weight:800;
+    letter-spacing:0.02em;
+    padding:3px 9px;
+    border-radius:999px;
+    z-index:1;
+  }
+  .tag-hot{ background:rgba(255,107,74,0.18); color:var(--coral); }
+  .tag-new{ background:rgba(78,205,196,0.18); color:var(--mint); }
+  .tag-fun{ background:rgba(255,210,63,0.18); color:var(--yellow); }
+  .tag-brain{ background:rgba(167,139,250,0.2); color:var(--violet); }
+
+  .cab-icon{
+    font-size:34px;
+    z-index:1;
+    filter:drop-shadow(0 4px 10px rgba(0,0,0,0.35));
+  }
+
+  .cab-thumb{
+    width:100%;
+    aspect-ratio:1/1;
+    border-radius:14px;
+    overflow:hidden;
+    z-index:1;
+    background:rgba(0,0,0,0.2);
+  }
+  .cab-thumb img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+  }
+
+  .cab-title{
+    font-family:'Black Han Sans', sans-serif;
+    font-size:18px;
+    z-index:1;
+    line-height:1.3;
+  }
+
+  .cab-desc{
+    font-size:12.5px;
+    color:var(--cream-dim);
+    line-height:1.5;
+    z-index:1;
+    min-height:36px;
+  }
+
+  .cab-cta{
+    z-index:1;
+    margin-top:auto;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:5px;
+    font-weight:700;
+    font-size:13px;
+    padding:9px 0;
+    border-radius:11px;
+    color:var(--bg-deep);
+  }
+  .cta-coral{ background:var(--coral); }
+  .cta-mint{ background:var(--mint); }
+  .cta-yellow{ background:var(--yellow); }
+  .cta-violet{ background:var(--violet); }
+
+  /* ---------- STREAK STRIP ---------- */
+  .streak{
+    margin:36px 20px 0;
+    background:var(--bg-panel-2);
+    border:1px solid rgba(255,255,255,0.07);
+    border-radius:18px;
+    padding:18px 20px;
+    display:flex;
+    align-items:center;
+    gap:14px;
+  }
+  .streak-icon{
+    font-size:26px;
+    flex-shrink:0;
+  }
+  .streak-text b{
+    display:block;
+    font-size:14px;
+    margin-bottom:2px;
+  }
+  .streak-text span{
+    font-size:12px;
+    color:var(--cream-dim);
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    text-align:center;
+    color:rgba(255,248,240,0.35);
+    font-size:11.5px;
+    margin-top:40px;
+    padding:0 20px;
+  }
 </style>
 </head>
 <body>
@@ -143,76 +314,78 @@ footer{
      (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
 
-<div class="hero">
-  <h1>🧠 두뇌 게임 모음</h1>
-  <p>무료로 즐기는 중독성 게임들 — 친구와 점수 비교해보세요!</p>
-</div>
+  <div class="hero">
+    <img class="hero-bg" src="images/hero.webp" alt="극한 두뇌 대결">
+    <div class="hero-content">
+      <div class="hero-badge"><span class="dot"></span> 매일 새벽 오픈되는 미션</div>
+      <h1>극한 두뇌<br><span class="accent">대결</span></h1>
+      <p>당신의 뇌는 몇 초를 버틸까? 다운로드 없이 바로 시작</p>
+    </div>
+  </div>
 
-<div class="game-section">
-  <div class="section-title">🔥 인기 게임</div>
-  <div class="game-grid">
+  <div class="section-label">
+    <span class="flame">🔥</span>
+    <h2>인기 게임</h2>
+    <span class="count">4개</span>
+  </div>
 
-    <a class="game-card orange" href="reaction.html">
-      <span class="game-badge badge-hot">🔥 HOT</span>
-      <div class="game-icon">⚡</div>
-      <div class="game-title">반응속도 테스트</div>
-      <div class="game-desc">화면이 바뀌면 즉시 클릭!<br>당신의 반응속도는 몇 ms?</div>
-      <div class="play-btn-wrap">
-        <span class="play-btn-sm">▶ 시작</span>
-      </div>
+  <div class="grid">
+
+    <a href="reaction.html" class="cab glow-coral">
+      <span class="cab-tag tag-hot">🔥 HOT</span>
+      <span class="cab-thumb"><img src="images/reaction.webp" alt="반응속도 테스트" loading="lazy"></span>
+      <span class="cab-title">반응속도 테스트</span>
+      <span class="cab-cta cta-coral">▶ 시작</span>
     </a>
 
-    <a class="game-card pink" href="stroop.html">
-      <span class="game-badge badge-fun">😂 웃김</span>
-      <div class="game-icon">🎨</div>
-      <div class="game-title">색깔 스트룹 테스트</div>
-      <div class="game-desc">뇌가 헷갈려서 웃음 폭발!<br>글자색을 골라야 해요</div>
-      <div class="play-btn-wrap">
-        <span class="play-btn-sm">▶ 시작</span>
-      </div>
+    <a href="stroop.html" class="cab glow-yellow">
+      <span class="cab-tag tag-fun">😂 웃김</span>
+      <span class="cab-thumb"><img src="images/stroop.webp" alt="색깔 스트룹 테스트" loading="lazy"></span>
+      <span class="cab-title">색깔 스트룹 테스트</span>
+      <span class="cab-cta cta-yellow">▶ 시작</span>
     </a>
 
-    <a class="game-card blue" href="click.html">
-      <span class="game-badge badge-new">🆕 NEW</span>
-      <div class="game-icon">🖱️</div>
-      <div class="game-title">클릭 속도 테스트</div>
-      <div class="game-desc">5초 안에 최대한 빠르게!<br>CPS 몇 점 나오나요?</div>
-      <div class="play-btn-wrap">
-        <span class="play-btn-sm">▶ 시작</span>
-      </div>
+    <a href="click.html" class="cab glow-mint">
+      <span class="cab-tag tag-new">🆕 NEW</span>
+      <span class="cab-thumb"><img src="images/click.webp" alt="클릭 속도 테스트" loading="lazy"></span>
+      <span class="cab-title">클릭 속도 테스트</span>
+      <span class="cab-cta cta-mint">▶ 시작</span>
     </a>
 
-    <a class="game-card purple" href="card.html">
-      <span class="game-badge badge-brain">🧠 두뇌</span>
-      <div class="game-icon">🐾</div>
-      <div class="game-title">강아지 카드 짝맞추기</div>
-      <div class="game-desc">귀여운 동물 카드를 뒤집어<br>짝을 모두 찾아보세요!</div>
-      <div class="play-btn-wrap">
-        <span class="play-btn-sm">▶ 시작</span>
-      </div>
+    <a href="card.html" class="cab glow-violet">
+      <span class="cab-tag tag-brain">🧠 두뇌</span>
+      <span class="cab-thumb"><img src="images/card.webp" alt="강아지 카드 짝맞추기" loading="lazy"></span>
+      <span class="cab-title">강아지 카드 짝맞추기</span>
+      <span class="cab-cta cta-violet">▶ 시작</span>
     </a>
 
   </div>
-</div>
 
-<!-- 애드센스 하단 -->
-<div class="ad-wrap" style="padding-top:20px;">
-  <!-- 애드센스 광고 코드 들어갈 자리 -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7807122304004914"
-     crossorigin="anonymous"></script>
-<!-- KWAVE CUP 상단 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-7807122304004914"
-     data-ad-slot="3175289832"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
+  <div class="streak">
+    <span class="streak-icon">🏆</span>
+    <div class="streak-text">
+      <b>점수 캡처해서 댓글로 자랑하기</b>
+      <span>상위 10% 나오면 인스타그램에 소개해드려요</span>
+    </div>
+  </div>
 
+  <!-- 애드센스 하단 -->
+  <div style="width:100%;max-width:720px;margin:32px auto 0;padding:0 20px;">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7807122304004914"
+       crossorigin="anonymous"></script>
+    <!-- KWAVE CUP 상단 -->
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-7807122304004914"
+         data-ad-slot="3175289832"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
 
-<footer>© 2026 Brain Games · 무료 두뇌 게임 모음</footer>
+  <footer>© 2026 Brain Games · 무료 두뇌 게임 모음</footer>
 
 </body>
 </html>
